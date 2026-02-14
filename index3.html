@@ -222,7 +222,10 @@
     </div>
 
     <div class="question-box" id="q8">
-        <div class="section-title">Pronome Demonstrativo</div>
+        <div class="section-title">
+    Pronome Demonstrativo 
+    <button class="btn-hint" onclick="openDemo()">🔍 TABELA DOS DEMONSTRATIVOS</button>
+</div>
         <span class="greek-line"><span class="highlight">τούτῳ</span> τῷ λόγῳ πιστεύομεν.</span>
         <div class="treebank-container">
             <button class="treebank-trigger" onclick="toggleTree(this)">Ver Treebank <span>▼</span></button>
@@ -435,6 +438,21 @@ window.addEventListener('click', function(event) {
     let modal = document.getElementById('hintModal');
     if (event.target == modal) { closeHint(); }
 });
+    // Funções para o Modal de Demonstrativos (Q8)
+function openDemo() { 
+    document.getElementById('demoModal').style.display = 'block'; 
+}
+function closeDemo() { 
+    document.getElementById('demoModal').style.display = 'none'; 
+}
+
+// Atualize sua função window.onclick para fechar ambos os modais
+window.onclick = function(event) {
+    let modalAutos = document.getElementById('hintModal');
+    let modalDemo = document.getElementById('demoModal');
+    if (event.target == modalAutos) { closeHint(); }
+    if (event.target == modalDemo) { closeDemo(); }
+}
 </script>
 <div id="hintModal" class="modal">
     <div class="modal-content">
@@ -462,6 +480,50 @@ window.addEventListener('click', function(event) {
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+    <div id="demoModal" class="modal">
+    <div class="modal-content" style="max-width: 700px;">
+        <span class="close-modal" onclick="closeDemo()">&times;</span>
+        <h3 style="color: #1a3a5a; text-align: center; font-family: 'Alegreya', serif; margin-top: 0;">Pronomes Demonstrativos (Nominativo)</h3>
+        
+        <table class="autos-table">
+            <thead>
+                <tr>
+                    <th>Tipo</th>
+                    <th>Masc.</th>
+                    <th>Fem.</th>
+                    <th>Neutro</th>
+                    <th>Sentido</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Proximidade</strong></td>
+                    <td><span class="greek-sample">ὅδε</span></td>
+                    <td><span class="greek-sample">ἥδε</span></td>
+                    <td><span class="greek-sample">τόδε</span></td>
+                    <td>Este (aqui)</td>
+                </tr>
+                <tr>
+                    <td><strong>Referência</strong></td>
+                    <td><span class="greek-sample">οὗτος</span></td>
+                    <td><span class="greek-sample">αὕτη</span></td>
+                    <td><span class="greek-sample">τοῦτο</span></td>
+                    <td>Esse/Este</td>
+                </tr>
+                <tr>
+                    <td><strong>Distância</strong></td>
+                    <td><span class="greek-sample">ἐκεῖνος</span></td>
+                    <td><span class="greek-sample">ἐκείνη</span></td>
+                    <td><span class="greek-sample">ἐκεῖνο</span></td>
+                    <td>Aquele</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-family: 'Didact Gothic', sans-serif; font-size: 0.85em; margin-top: 15px; color: #7f8c8d; font-style: italic;">
+            * Nota: Na Questão 8, usamos o Dativo <strong>τούτῳ</strong> (de οὗτος).
+        </p>
     </div>
 </div>
 </body>
