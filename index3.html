@@ -34,6 +34,38 @@
         .btn-verify:hover { background: #2c5282; }
         
         .feedback { margin-top: 15px; padding: 15px; border-radius: 6px; display: none; font-weight: bold; font-family: 'Didact Gothic', sans-serif; }
+
+        /* --- ADIÇÃO 1: ESTILOS DO MODAL E TABELA --- */
+.modal {
+    display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+    width: 100%; height: 100%; background-color: rgba(0,0,0,0.7);
+    backdrop-filter: blur(3px);
+}
+.modal-content {
+    background-color: white; margin: 10% auto; padding: 30px;
+    border-radius: 12px; width: 90%; max-width: 600px; position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5); animation: fadeIn 0.3s;
+}
+.close-modal {
+    position: absolute; right: 20px; top: 10px; font-size: 28px;
+    font-weight: bold; cursor: pointer; color: #aaa;
+}
+.close-modal:hover { color: #d35400; }
+
+.autos-table {
+    width: 100%; border-collapse: collapse; margin-top: 20px;
+    font-family: 'Didact Gothic', sans-serif; font-size: 0.95em;
+}
+.autos-table th { background: #1a3a5a; color: white; padding: 12px; text-align: left; }
+.autos-table td { border-bottom: 1px solid #eee; padding: 12px; vertical-align: top; }
+.greek-sample { font-family: 'Alegreya', serif; font-size: 1.2em; color: #d35400; font-weight: bold; }
+
+.btn-hint {
+    background: #f1c40f; color: #1a3a5a; border: none; padding: 4px 10px;
+    border-radius: 20px; cursor: pointer; font-size: 0.75em; font-weight: bold;
+    margin-left: 10px; vertical-align: middle; transition: 0.2s;
+}
+@keyframes fadeIn { from {opacity: 0; transform: translateY(-20px);} to {opacity: 1; transform: translateY(0);} }
     </style>
 </head>
 <body>
@@ -274,7 +306,10 @@
     </div>
 
     <div class="question-box" id="q12">
-        <div class="section-title">Pronome (Auto-referência)</div>
+        <div class="section-title">
+    Pronome (Auto-referência) 
+    <button class="btn-hint" onclick="openHint()">🔍 DICA EXTRA</button>
+</div>
         <span class="greek-line">ὁ <span class="highlight">αὐτὸς</span> ἀνὴρ λέγει.</span>
         <div class="treebank-container">
             <button class="treebank-trigger" onclick="toggleTree(this)">Ver Treebank <span>▼</span></button>
@@ -386,7 +421,48 @@
             feedback.style.color = "#721c24";
         }
     }
-</script>
 
+    /* --- ADIÇÃO 4: FUNÇÕES DE ABRIR/FECHAR --- */
+function openHint() { 
+    document.getElementById('hintModal').style.display = 'block'; 
+}
+function closeHint() { 
+    document.getElementById('hintModal').style.display = 'none'; 
+}
+
+// Fecha se clicar fora da caixa branca
+window.addEventListener('click', function(event) {
+    let modal = document.getElementById('hintModal');
+    if (event.target == modal) { closeHint(); }
+});
+</script>
+<div id="hintModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeHint()">&times;</span>
+        <h3 style="color: #1a3a5a; text-align: center; font-family: 'Alegreya', serif; margin-top: 0;">Usos de αὐτός</h3>
+        <table class="autos-table">
+            <thead>
+                <tr><th>Posição</th><th>Sentido</th><th>Exemplo</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Atributiva</strong></td>
+                    <td>Identidade: <strong>"o mesmo"</strong></td>
+                    <td><span class="greek-sample">ὁ αὐτὸς</span> ἀνήρ</td>
+                </tr>
+                <tr>
+                    <td><strong>Predicativa</strong></td>
+                    <td>Enfático: <strong>"próprio"</strong></td>
+                    <td><span class="greek-sample">αὐτὸς</span> ὁ ἀνήρ</td>
+                </tr>
+                <tr>
+                    <td><strong>Pronominal</strong></td>
+                    <td>3ª Pessoa: <strong>"o, a, lhe"</strong></td>
+                    <td>βλέπω <span class="greek-sample">αὐτόν</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>
