@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisão: Flexão e Sintaxe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Didact+Gothic&display=swap');
+
+        :root {
+            --primary: #2c3e50;
+            --accent: #e67e22;
+            --success: #27ae60;
+            --error: #c0392b;
+            --bg: #fdfbf7;
+        }
+
+        body { font-family: 'Alegreya', serif; background-color: var(--bg); color: var(--primary); padding: 20px; line-height: 1.6; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        
+        h1 { text-align: center; font-weight: 900; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 20px; }
+        .intro { text-align: center; color: #7f8c8d; font-family: 'Didact Gothic', sans-serif; margin-bottom: 30px; }
+
+        .question-card { margin-bottom: 40px; padding: 25px; border: 1px solid #f1f1f1; border-radius: 12px; transition: transform 0.2s; }
+        .question-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+        .greek-text { font-size: 1.8em; display: block; margin-bottom: 15px; color: #1a1a1a; line-height: 1.4; }
+        .highlight { color: var(--accent); font-weight: bold; border-bottom: 2px solid var(--accent); }
+
+        .options-list { list-style: none; padding: 0; margin: 20px 0; }
+        .option-item { margin-bottom: 10px; }
+        
+        /* Estilizando os Radio Buttons */
+        label { 
+            display: block; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; 
+            cursor: pointer; transition: all 0.2s; font-family: 'Didact Gothic', sans-serif;
+        }
+        input[type="radio"] { margin-right: 10px; }
+        label:hover { background-color: #fff9f4; border-color: var(--accent); }
+        input[type="radio"]:checked + span { font-weight: bold; color: var(--accent); }
+
+        .btn-check { 
+            background: var(--primary); color: white; border: none; padding: 12px 25px; 
+            border-radius: 6px; cursor: pointer; font-family: 'Didact Gothic', sans-serif;
+            font-weight: bold; width: 100%; letter-spacing: 1px;
+        }
+        .btn-check:hover { background: #34495e; }
+
+        .feedback { 
+            margin-top: 15px; padding: 15px; border-radius: 8px; display: none; 
+            font-family: 'Didact Gothic', sans-serif; font-size: 0.95em;
+        }
+        .correct { background: #e8f5e9; color: #2e7d32; border-left: 5px solid var(--success); }
+        .wrong { background: #ffebee; color: #c62828; border-left: 5px solid var(--error); }
+        
+        .explanation { margin-top: 8px; display: block; font-style: italic; opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Morfossintaxe Grega</h1>
+    <p class="intro">Selecione a análise correta para o termo em destaque em cada sentença.</p>
+
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            sentence: "ὁ <span class='highlight'>στρατηγὸς</span> γράφει τὴν ἐπιστολήν.",
+            options: ["Nominativo Singular (Sujeito)", "Acusativo Singular (Objeto)", "Vocativo Singular"],
+            correct: 0,
+            expl: "O artigo 'ὁ' e a desinência '-ος' indicam o agente da ação (Sujeito)."
+        },
+        {
+            sentence: "οἱ θεοὶ δῶρα τοῖς <span class='highlight'>ἀνθρώποις</span> παρέχουσιν.",
+            options: ["Genitivo Plural", "Dativo Plural (Objeto Indireto)", "Acusativo Plural"],
+            correct: 1,
+            expl: "O dativo 'τοῖς ... -οις' indica quem recebe o benefício da ação dos deuses."
+        },
+        {
+            sentence: "ἡ <span class='highlight'>σοφία</span> πηγή ἐστι τῆς εὐδαιμονίας.",
+            options: ["Nominativo Singular", "Dativo Singular", "Acusativo Singular"],
+            correct: 0,
+            expl: "Aqui 'σοφία' é o sujeito da sentença com o verbo de ligação 'ἐστι'."
+        },
+        {
+            sentence: "βλέπομεν τὴν τῶν <span class='highlight'>ἄστρων</span> καλλονήν.",
+            options: ["Dativo Plural", "Acusativo Plural", "Genitivo Plural (Posse)"],
+            correct: 2,
+            expl: "O termo indica de quem é a beleza (a beleza das estrelas)."
+        },
+        {
+            sentence: "ὁ δοῦλος φέρει τὸν <span class='highlight'>οἶνον</span>.",
+            options: ["Acusativo Singular (Objeto)", "Nominativo Singular", "Genitivo Singular"],
+            correct: 0,
+            expl: "O objeto direto da ação de carregar é indicado pelo acusativo 'τὸν ... -ον'."
+        },
+        {
+            sentence: "ἐν τῇ <span class='highlight'>πόλει</span> πολλοὶ ἄνθρωποι εἰσιν.",
+            options: ["Genitivo Singular", "Dativo Singular (Locativo)", "Nominativo Plural"],
+            correct: 1,
+            expl: "A preposição 'ἐν' rege obrigatoriamente o caso Dativo para indicar lugar."
+        },
+        {
+            sentence: "ὦ <span class='highlight'>ἄνθρωπε</span>, τί ποιεῖς;",
+            options: ["Nominativo Singular", "Vocativo Singular", "Acusativo Singular"],
+            correct: 1,
+            expl: "A interjeição 'ὦ' acompanhada da desinência '-ε' caracteriza o chamamento."
+        },
+        {
+            sentence: "τὸ ῥόδον <span class='highlight'>καλόν</span> ἐστιν.",
+            options: ["Predicativo do Sujeito", "Objeto Direto", "Adjunto Adnominal"],
+            correct: 0,
+            expl: "O adjetivo concorda com o sujeito neutro e atribui uma qualidade via verbo ser."
+        },
+        {
+            sentence: "οἱ στρατιῶται <span class='highlight'>μάχονται</span> ἀνδρείως.",
+            options: ["Verbo na Voz Ativa", "Verbo na Voz Média/Passiva", "Substantivo Masculino"],
+            correct: 1,
+            expl: "A terminação '-ονται' indica um verbo depoente ou na voz média/passiva."
+        },
+        {
+            sentence: "διὰ τὴν <span class='highlight'>ἀλήθειαν</span> κινδυνεύομεν.",
+            options: ["Genitivo Singular", "Nominativo Singular", "Acusativo Singular"],
+            correct: 2,
+            expl: "A preposição 'διὰ' com Acusativo indica causa ('por causa da verdade')."
+        }
+    ];
+
+    const container = document.getElementById('quiz-container');
+
+    quizData.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.innerHTML = `
+            <span class="greek-text">${item.sentence}</span>
+            <div class="options-list">
+                ${item.options.map((opt, i) => `
+                    <div class="option-item">
+                        <label>
+                            <input type="radio" name="q${index}" value="${i}">
+                            <span>${opt}</span>
+                        </label>
+                    </div>
+                `).join('')}
+            </div>
+            <button class="btn-check" onclick="checkAnswer(${index})">VERIFICAR</button>
+            <div id="feed${index}" class="feedback"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    function checkAnswer(idx) {
+        const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+        const feedback = document.getElementById(`feed${idx}`);
+        
+        if (!selected) {
+            alert("Por favor, selecione uma opção.");
+            return;
+        }
+
+        feedback.style.display = 'block';
+        if (parseInt(selected.value) === quizData[idx].correct) {
+            feedback.className = "feedback correct";
+            feedback.innerHTML = `✓ Correto! <span class="explanation">${quizData[idx].expl}</span>`;
+        } else {
+            feedback.className = "feedback wrong";
+            feedback.innerHTML = `✗ Tente novamente. Observe a terminação e o artigo.`;
+        }
+    }
+</script>
+
+</body>
+</html>
