@@ -117,7 +117,10 @@
     </div>
 
     <div class="question-box" id="q3">
-        <div class="section-title">Pronome Relativo</div>
+        <div class="section-title">
+    Pronome Relativo 
+    <button class="btn-hint" onclick="openRel()">🔍 DICA: CONCORDÂNCIA DO RELATIVO</button>
+</div>
         <span class="greek-line">ὁ ἀνὴρ <span class="highlight">ὃν</span> εἶδες σοφός ἐστιν.</span>
         <div class="treebank-container">
             <button class="treebank-trigger" onclick="toggleTree(this)">Ver Treebank <span>▼</span></button>
@@ -472,6 +475,22 @@ window.onclick = function(event) {
     });
 }
 
+    // Funções para o Modal de Relativos
+function openRel() { 
+    document.getElementById('relModal').style.display = 'block'; 
+}
+function closeRel() { 
+    document.getElementById('relModal').style.display = 'none'; 
+}
+
+// Atualização do fechador universal (incluindo o novo relModal)
+window.onclick = function(event) {
+    const modals = ['hintModal', 'demoModal', 'partModal', 'relModal'];
+    modals.forEach(id => {
+        let m = document.getElementById(id);
+        if (event.target == m) { m.style.display = 'none'; }
+    });
+}
     
 </script>
 <div id="hintModal" class="modal">
@@ -597,54 +616,47 @@ window.onclick = function(event) {
 
     </div>
 </div>
-    <!--
+  
 
-    <div id="partModal" class="modal">
-        <div class="modal-content" style="max-width: 750px;">
-            <span class="close-modal" onclick="closePart()">&times;</span>
-            <h3 style="color: #1a3a5a; text-align: center; font-family: 'Alegreya', serif; margin-top: 0;">O Sistema dos Particípios</h3>
-            
-            <table class="autos-table">
-                <thead>
-                    <tr>
-                        <th>Uso</th>
-                        <th>Exemplo</th>
-                        <th>Tradução</th>
-                    </tr>
-                </thead>
-                <tbody>
-                   <tr>
-                    <td><strong>Presente</strong></td>
-                    <td><span class="greek-sample">ἀκούων</span></td>
-                    <td>Ação Simultânea</td>
-                    <td>Ouvindo / Enquanto ouve</td>
-                   </tr>
-                    
-                    <tr>
-                        <td><strong>Articulado</strong><br><small>(Substantivado)</small></td>
-                        <td><span class="greek-sample">τοῖς ἀκούουσι</span></td>
-                        <td><strong>Para os que ouvem</strong> / aos ouvintes</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Circunstancial</strong><br><small>(Aoristo - Q10)</small></td>
-                        <td><span class="greek-sample">ἀκούσας</span></td>
-                        <td><strong>Tendo ouvido</strong> / após ouvir</td>
-                    </tr>
-                    <tr>
-                        <td><strong>De Finalidade</strong><br><small>(Futuro - Q15)</small></td>
-                        <td><span class="greek-sample">λυσόμενος</span></td>
-                        <td><strong>Para libertar</strong> / com a intenção de libertar</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p style="font-family: 'Didact Gothic', sans-serif; font-size: 0.9em; margin-top: 15px; background: #fffdf0; padding: 12px; border-left: 4px solid #f1c40f; color: #555;">
-    <strong>💡 Diferença Crucial:</strong> <br>
-    Na <strong>Questão 5</strong>, o particípio funciona como um <strong>nome</strong> (os ouvintes) porque possui artigo. <br>
-    Nas <strong>Questões 10 e 15</strong>, ele funciona como um <strong>advérbio</strong>, descrevendo a circunstância da ação principal.
-</p>
+    <div id="relModal" class="modal">
+    <div class="modal-content" style="max-width: 650px;">
+        <span class="close-modal" onclick="closeRel()">&times;</span>
+        <h3 style="color: #1a3a5a; text-align: center; font-family: 'Alegreya', serif; margin-top: 0;">O Pronome Relativo (ὅς, ἥ, ὅ)</h3>
+        
+        <p style="font-family: 'Didact Gothic', sans-serif; font-size: 1em; color: #2c3e50; line-height: 1.5;">
+            O pronome relativo concorda com o seu antecedente em <strong>gênero</strong> e <strong>número</strong>, mas o seu <strong>caso</strong> depende da função que ele exerce na sua própria oração.
+        </p>
+
+        <table class="autos-table">
+            <thead>
+                <tr>
+                    <th>Termo</th>
+                    <th>Gênero / Número</th>
+                    <th>Caso</th>
+                    <th>Motivo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="greek-sample">ὁ ἀνὴρ</span></td>
+                    <td>Masc. Singular</td>
+                    <td>Nominativo</td>
+                    <td>Sujeito de "é sábio"</td>
+                </tr>
+                <tr>
+                    <td><span class="greek-sample">ὃν</span></td>
+                    <td>Masc. Singular</td>
+                    <td><strong>Acusativo</strong></td>
+                    <td>Objeto de "(tu) viste"</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div style="margin-top: 20px; padding: 15px; background: #fdf2f2; border-radius: 8px; font-family: 'Didact Gothic', sans-serif; border-left: 5px solid #e74c3c;">
+            <strong>Tradução:</strong> O homem <strong>o qual</strong> (que) viste é sábio.
         </div>
     </div>
-    -->
+</div>
 
 </body>
 </html>
