@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício de Grego Antigo</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; padding: 20px; line-height: 1.6; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; }
+        .question { margin-bottom: 25px; padding: 15px; border-bottom: 1px solid #eee; }
+        .greek-text { font-size: 1.3em; color: #2980b9; font-weight: bold; margin-bottom: 10px; }
+        .options { list-style: none; padding: 0; }
+        .options li { margin: 10px 0; }
+        button { background-color: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 1em; }
+        button:hover { background-color: #2980b9; }
+        .feedback { margin-top: 10px; padding: 10px; border-radius: 5px; display: none; }
+        .correct { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .wrong { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Análise Sintática: Grego Antigo</h1>
+    <p>Identifique o caso e a função das palavras em destaque:</p>
+
+    <div id="quiz">
+        <div class="question" id="q1">
+            <div class="greek-text">1. ὁ δὲ <span style="text-decoration: underline;">βασιλεὺς</span> ταύτῃ οὐκ ἦγεν.</div>
+            <ul class="options">
+                <li><input type="radio" name="q1" value="correct"> Nominativo Singular (Sujeito)</li>
+                <li><input type="radio" name="q1" value="wrong"> Acusativo Singular (Objeto Direto)</li>
+                <li><input type="radio" name="q1" value="wrong"> Genitivo Singular (Posse)</li>
+            </ul>
+            <button onclick="checkAnswer('q1', 'Esta é a forma do sujeito (terceira declinação). Note o artigo \'ὁ\'.')">Verificar</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q2">
+            <div class="greek-text">2. Σωκράτης <span style="text-decoration: underline;">λέγων</span> ταῦτα ἐπαύσατο.</div>
+            <p>Qual a função do particípio?</p>
+            <ul class="options">
+                <li><input type="radio" name="q2" value="wrong"> Dativo (Objeto Indireto)</li>
+                <li><input type="radio" name="q2" value="correct"> Nominativo Singular (Particípio Predicativo)</li>
+                <li><input type="radio" name="q2" value="wrong"> Vocativo (Chamamento)</li>
+            </ul>
+            <button onclick="checkAnswer('q2', 'O particípio concorda com o sujeito Σωκράτης.')">Verificar</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q3">
+            <div class="greek-text">3. διὰ τῶν <span style="text-decoration: underline;">ἀγγέλων</span> ἔλεγον.</div>
+            <ul class="options">
+                <li><input type="radio" name="q3" value="wrong"> Acusativo Plural</li>
+                <li><input type="radio" name="q3" value="correct"> Genitivo Plural (Regido pela preposição διὰ)</li>
+                <li><input type="radio" name="q3" value="wrong"> Dativo Plural</li>
+            </ul>
+            <button onclick="checkAnswer('q3', 'A terminação -ων é característica do genitivo plural.')">Verificar</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function checkAnswer(questionId, explanation) {
+        const qDiv = document.getElementById(questionId);
+        const feedbackDiv = qDiv.querySelector('.feedback');
+        const selected = qDiv.querySelector('input[name="' + questionId + '"]:checked');
+
+        if (!selected) {
+            alert("Por favor, selecione uma opção.");
+            return;
+        }
+
+        feedbackDiv.style.display = 'block';
+        if (selected.value === 'correct') {
+            feedbackDiv.className = 'feedback correct';
+            feedbackDiv.innerHTML = "<strong>Correto!</strong> " + explanation;
+        } else {
+            feedbackDiv.className = 'feedback wrong';
+            feedbackDiv.innerHTML = "<strong>Incorreto.</strong> Tente analisar a terminação da palavra.";
+        }
+    }
+</script>
+
+</body>
+</html>
