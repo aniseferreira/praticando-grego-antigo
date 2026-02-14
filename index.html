@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisão Global de Grego Antigo</title>
+    <style>
+    /* Importando fontes do Google para Grego */
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Didact+Gothic&display=swap');
+
+body { 
+    font-family: 'Alegreya', serif; 
+    background-color: #f0f2f5; 
+    padding: 20px; 
+    color: #2c3e50; 
+}
+
+.container { 
+    max-width: 900px; 
+    margin: auto; 
+    background: white; 
+    padding: 40px; 
+    border-radius: 12px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+}
+
+h1 { 
+    font-family: 'Alegreya', serif; 
+    font-weight: 900;
+    color: #1a3a5a; 
+    text-align: center; 
+    border-bottom: 2px solid #e1e4e8;
+    padding-bottom: 20px;
+}
+
+/* Estilo do Grego */
+.greek-line { 
+    font-family: 'Alegreya', serif; /* Ou 'Didact Gothic' se preferir sem serifa */
+    font-size: 1.7em; 
+    margin-bottom: 15px; 
+    display: block; 
+    line-height: 1.4;
+}
+
+.highlight { 
+    color: #d35400; 
+    border-bottom: 2px dashed #d35400; 
+}
+
+/* Estilo do Acordeão para o Treebank */
+.treebank-container {
+    margin-bottom: 20px;
+}
+
+.treebank-trigger {
+    background: #edf2f7;
+    color: #4a5568;
+    cursor: pointer;
+    padding: 8px 15px;
+    width: 100%;
+    border: 1px solid #cbd5e0;
+    text-align: left;
+    outline: none;
+    font-size: 0.9em;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.treebank-trigger:after {
+    content: '▼';
+    font-size: 0.7em;
+}
+
+.treebank-trigger.active:after {
+    content: '▲';
+}
+
+.treebank-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: #f8fafc;
+    border: 0 solid #cbd5e0;
+}
+
+.treebank-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    padding: 15px;
+    margin: auto;
+}
+
+/* Botão de Verificação */
+.btn-verify {
+    background: #1a3a5a;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    font-family: 'Didact Gothic', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.2s;
+}
+
+.btn-verify:hover { background: #2c5282; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Revisão de Morfossintaxe e Tradução</h1>
+    <p style="text-align: center;">Analise as sentenças autênticas e selecione a flexão e tradução corretas.</p>
+
+    <div class="question-box" id="q1">
+        <div class="section-title">1ª Declinação (Masculino)</div>
+        <span class="greek-line">ὦ <span class="highlight">νεανία</span>, τί λέγεις;</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise1">
+                    <option value="">-- Selecione --</option>
+                    <option value="v">Vocativo Singular</option>
+                    <option value="n">Nominativo Singular</option>
+                    <option value="d">Dativo Singular</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad1">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">O jovem diz algo?</option>
+                    <option value="b">Ó jovem, o que dizes?</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q1', 'v', 'b')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q2">
+        <div class="section-title">3ª Declinação (Neutro)</div>
+        <span class="greek-line">ἐποίησε τὰ <span class="highlight">πράγματα</span> ταῦτα.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise2">
+                    <option value="">-- Selecione --</option>
+                    <option value="as">Acusativo Singular</option>
+                    <option value="ap">Acusativo Plural (Objeto)</option>
+                    <option value="np">Nominativo Plural</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad2">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">Fez estas coisas/ações.</option>
+                    <option value="b">A ação foi feita.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q2', 'ap', 'a')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q3">
+        <div class="section-title">Pronome Relativo</div>
+        <span class="greek-line">ὁ ἀνὴρ <span class="highlight">ὃν</span> εἶδες σοφός ἐστιν.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise3">
+                    <option value="">-- Selecione --</option>
+                    <option value="m">Masc. Acusativo Singular</option>
+                    <option value="n">Masc. Nominativo Singular</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad3">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">O homem que te viu é sábio.</option>
+                    <option value="b">O homem que viste é sábio.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q3', 'm', 'b')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q4">
+        <div class="section-title">Adjetivo 3ª Declinação</div>
+        <span class="greek-line">πάντα τὰ <span class="highlight">ἀληθῆ</span> λέγω.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise4">
+                    <option value="">-- Selecione --</option>
+                    <option value="ns">Nom. Singular Fem.</option>
+                    <option value="ap">Acusativo Plural Neutro</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad4">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">Digo todas as verdades (coisas verdadeiras).</option>
+                    <option value="b">Digo que tudo é verdade.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q4', 'ap', 'a')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q5">
+        <div class="section-title">Particípio</div>
+        <span class="greek-line">τοῖς <span class="highlight">ἀκούουσι</span> ταῦτα λέγω.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise5">
+                    <option value="">-- Selecione --</option>
+                    <option value="dp">Dativo Plural Masc.</option>
+                    <option value="ns">Nominativo Singular</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad5">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">Digo isto para quem ouve.</option>
+                    <option value="b">Digo isto enquanto ouço.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q5', 'dp', 'a')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+    <div class="question-box" id="q6">
+        <div class="section-title">3ª Declinação (Neutro - Sibilante)</div>
+        <span class="greek-line">τὸ <span class="highlight">γένoς</span> τῶν ἀνθρώπων θνητόν ἐστιν.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise6">
+                    <option value="">-- Selecione --</option>
+                    <option value="n">Nominativo Singular Neutro</option>
+                    <option value="a">Acusativo Singular Masc.</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad6">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">A linhagem dos homens é mortal.</option>
+                    <option value="b">O nascimento do homem foi mortal.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q6', 'n', 'a')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q7">
+        <div class="section-title">Adjetivo (2 terminações)</div>
+        <span class="greek-line">ἡ ὁδὸς <span class="highlight">ἄδικος</span> ἐστίν.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise7">
+                    <option value="">-- Selecione --</option>
+                    <option value="m">Masc. Nominativo Singular</option>
+                    <option value="f">Fem. Nominativo Singular (Predicativo)</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad7">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">O caminho é injusto.</option>
+                    <option value="b">A estrada é longa.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q7', 'f', 'a')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q8">
+        <div class="section-title">Pronome Demonstrativo</div>
+        <span class="greek-line"><span class="highlight">τούτῳ</span> τῷ λόγῳ πιστεύομεν.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise8">
+                    <option value="">-- Selecione --</option>
+                    <option value="d">Dativo Singular Masc.</option>
+                    <option value="g">Genitivo Singular Masc.</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad8">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">Acreditamos nesta palavra.</option>
+                    <option value="b">Para aquela palavra acreditamos.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q8', 'd', 'a')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q9">
+        <div class="section-title">3ª Declinação (Líquida)</div>
+        <span class="greek-line">ὁ <span class="highlight">ῥήτωρ</span> τοὺς πολίτας πείθει.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise9">
+                    <option value="">-- Selecione --</option>
+                    <option value="n">Nominativo Singular (Sujeito)</option>
+                    <option value="v">Vocativo Singular</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad9">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">O orador convence os cidadãos.</option>
+                    <option value="b">O cidadão convence o orador.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q9', 'n', 'a')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q10">
+        <div class="section-title">Particípio (Aoristo)</div>
+        <span class="greek-line"><span class="highlight">ἀκούσας</span> ταῦτα, ἐθαύμασα.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise10">
+                    <option value="">-- Selecione --</option>
+                    <option value="n">Nom. Sing. Masc. (Part. Conjunto)</option>
+                    <option value="a">Acus. Plural Masc.</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad10">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">Ao ouvir estas coisas, admirei-me.</option>
+                    <option value="b">As coisas ouvidas me admiraram.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q10', 'n', 'a')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q11">
+        <div class="section-title">3ª Declinação (Tema em -ι)</div>
+        <span class="greek-line">αἱ <span class="highlight">πόλεις</span> ἐλεύθεραί εἰσιν.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise11">
+                    <option value="">-- Selecione --</option>
+                    <option value="np">Nominativo Plural Fem.</option>
+                    <option value="gs">Genitivo Singular Fem.</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad11">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">As cidades são livres.</option>
+                    <option value="b">A cidade é livre.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q11', 'np', 'a')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q12">
+        <div class="section-title">Pronome (Auto-referência)</div>
+        <span class="greek-line">ὁ <span class="highlight">αὐτὸς</span> ἀνὴρ λέγει.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise12">
+                    <option value="">-- Selecione --</option>
+                    <option value="n">Nom. Sing. (Função Identificadora)</option>
+                    <option value="p">Nom. Sing. (Função Enfática)</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad12">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">O próprio homem diz.</option>
+                    <option value="b">O mesmo homem diz.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q12', 'n', 'b')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q13">
+        <div class="section-title">3ª Declinação (Velar)</div>
+        <span class="greek-line">οἱ <span class="highlight">φύλακες</span> φυλάττουσι.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise13">
+                    <option value="">-- Selecione --</option>
+                    <option value="np">Nominativo Plural Masc.</option>
+                    <option value="ap">Acusativo Plural Masc.</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad13">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">Os guardas vigiam.</option>
+                    <option value="b">Vigiam os guardas (Obj. Direto).</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q13', 'np', 'a')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q14">
+        <div class="section-title">Adjetivo (1ª/2ª)</div>
+        <span class="greek-line">ἡ ψυχὴ <span class="highlight">ἀθάνατός</span> ἐστιν.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise14">
+                    <option value="">-- Selecione --</option>
+                    <option value="f">Fem. Nominativo Singular</option>
+                    <option value="m">Masc. Nominativo Singular</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad14">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">A alma é imortal.</option>
+                    <option value="b">O sopro é imortal.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q14', 'f', 'a')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q15">
+        <div class="section-title">Particípio (Futuro)</div>
+        <span class="greek-line">ἦλθε <span class="highlight">λυσόμενος</span> τὸν υἱόν.</span>
+        <span class="treebank-link">AGDT: [TREEBANK AQUI]</span>
+        <div class="options-group">
+            <div class="option-column">
+                <h4>Análise do Termo</h4>
+                <select id="analise15">
+                    <option value="">-- Selecione --</option>
+                    <option value="n">Nom. Sing. Masc. (Finalidade)</option>
+                    <option value="v">Vocativo Singular</option>
+                </select>
+            </div>
+            <div class="option-column">
+                <h4>Tradução Correta</h4>
+                <select id="trad15">
+                    <option value="">-- Selecione --</option>
+                    <option value="a">Veio para libertar o filho.</option>
+                    <option value="b">Libertando o filho, ele veio.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="verify('q15', 'n', 'a')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+<script>
+    function verify(qId, correctAna, correctTrad) {
+        const qDiv = document.getElementById(qId);
+        const ana = qDiv.querySelector('select[id^="analise"]').value;
+        const trad = qDiv.querySelector('select[id^="trad"]').value;
+        const feedback = qDiv.querySelector('.feedback');
+
+        feedback.style.display = 'block';
+        if (ana === correctAna && trad === correctTrad) {
+            feedback.innerHTML = "✓ Excelente! Análise e tradução corretas.";
+            feedback.style.backgroundColor = "#d4edda";
+            feedback.style.color = "#155724";
+        } else {
+            feedback.innerHTML = "✗ Algo está incorreto. Verifique a terminação e a relação sintática.";
+            feedback.style.backgroundColor = "#f8d7da";
+            feedback.style.color = "#721c24";
+        }
+    }
+</script>
+
+</body>
+</html>
