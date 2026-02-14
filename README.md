@@ -1,2 +1,2 @@
-# praticando-grego-antigo
-Exercícios de revisão de morfologia e sintaxxe
+# Praticando-grego-antigo
+Exercícios de revisão de morfologia e sintaxe
