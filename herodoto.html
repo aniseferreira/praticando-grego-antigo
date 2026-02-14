@@ -167,4 +167,96 @@
 
     <div class="question-box" id="q1">
         <span class="section-tag">Histórias 1.1</span>
-        <span class="greek-line">Π
+        <span class="greek-line">Περσέων οἱ λόγιοι Φοίνικας αἰτίους φασὶ <span class="highlight">γενέσθαι</span> τῆς διαφορῆς.</span>
+        
+        <div class="treebank-container">
+            <button class="treebank-trigger" onclick="toggleTree(this)">Ver Diagrama AGDT <span>▼</span></button>
+            <div class="treebank-content">
+                <img src="treebank_1_1.png" alt="Treebank AGDT">
+            </div>
+        </div>
+
+        <div class="options-grid">
+            <div class="option-item">
+                <label>Morfossintaxe:</label>
+                <select id="ana1">
+                    <option value="">-- Selecione --</option>
+                    <option value="inf">Oração Infinitiva (Subst. Objetiva)</option>
+                    <option value="part">Particípio Atributivo</option>
+                </select>
+            </div>
+            <div class="option-item">
+                <label>Tradução:</label>
+                <select id="trad1">
+                    <option value="">-- Selecione --</option>
+                    <option value="err">Os persas dizem aos fenícios...</option>
+                    <option value="cor">Dizem que os fenícios foram os culpados...</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="check('q1', 'inf', 'cor')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    <div class="question-box" id="q2">
+        <span class="section-tag">Histórias 1.5</span>
+        <span class="greek-line">τὸν δὲ οἶδα αὐτὸς... τοῦτον <span class="highlight">σημήνας</span> προβήσομαι.</span>
+        
+        <div class="treebank-container">
+            <button class="treebank-trigger" onclick="toggleTree(this)">Ver Diagrama AGDT <span>▼</span></button>
+            <div class="treebank-content">
+                <img src="treebank_1_5.png" alt="Treebank AGDT">
+            </div>
+        </div>
+
+        <div class="options-grid">
+            <div class="option-item">
+                <label>Morfossintaxe:</label>
+                <select id="ana2">
+                    <option value="">-- Selecione --</option>
+                    <option value="cor">Particípio Conjunto (Temporal)</option>
+                    <option value="err">Aoristo Indicativo</option>
+                </select>
+            </div>
+            <div class="option-item">
+                <label>Tradução:</label>
+                <select id="trad2">
+                    <option value="">-- Selecione --</option>
+                    <option value="cor">Após indicá-lo, prosseguirei.</option>
+                    <option value="err">Eu conheço o sinal e vou adiante.</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn-verify" onclick="check('q2', 'cor', 'cor')">Verificar</button>
+        <div class="feedback"></div>
+    </div>
+
+    </div>
+
+<script>
+    function toggleTree(btn) {
+        btn.classList.toggle("active");
+        var content = btn.nextElementSibling;
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = "800px"; 
+        }
+    }
+
+    function check(qId, correctAna, correctTrad) {
+        const div = document.getElementById(qId);
+        const ana = div.querySelector('select[id^="ana"]').value;
+        const trad = div.querySelector('select[id^="trad"]').value;
+        const feed = div.querySelector('.feedback');
+
+        feed.style.display = 'block';
+        if (ana === correctAna && trad === correctTrad) {
+            feed.className = "feedback success";
+            feed.innerHTML = "✓ Correto! Excelente análise do período.";
+        } else {
+            feed.className = "feedback error";
+            feed.innerHTML = "✗ Incorreto. Observe a relação entre a oração subordinada e a principal.";
+        }
+    }
+</script>
