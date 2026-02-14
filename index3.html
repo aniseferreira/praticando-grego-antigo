@@ -267,7 +267,10 @@
     </div>
 
     <div class="question-box" id="q10">
-        <div class="section-title">Particípio (Aoristo)</div>
+        <div class="section-title">
+    Particípio (Aoristo) 
+    <button class="btn-hint" onclick="openPart()">🔍 DICA: OS PARTICÍPIOS</button>
+</div>
         <span class="greek-line"><span class="highlight">ἀκούσας</span> ταῦτα, ἐθαύμασα.</span>
         <div class="treebank-container">
             <button class="treebank-trigger" onclick="toggleTree(this)">Ver Treebank <span>▼</span></button>
@@ -375,7 +378,10 @@
     </div>
 
     <div class="question-box" id="q15">
-        <div class="section-title">Particípio (Futuro)</div>
+        <div class="section-title">
+    Particípio (Futuro) 
+    <button class="btn-hint" onclick="openPart()">🔍 DICA: OS PARTICÍPIOS</button>
+</div>
         <span class="greek-line">ἦλθε <span class="highlight">λυσόμενος</span> τὸν υἱόν.</span>
         <div class="treebank-container">
             <button class="treebank-trigger" onclick="toggleTree(this)">Ver Treebank <span>▼</span></button>
@@ -446,13 +452,24 @@ function closeDemo() {
     document.getElementById('demoModal').style.display = 'none'; 
 }
 
-// Atualize sua função window.onclick para fechar ambos os modais
-window.onclick = function(event) {
-    let modalAutos = document.getElementById('hintModal');
-    let modalDemo = document.getElementById('demoModal');
-    if (event.target == modalAutos) { closeHint(); }
-    if (event.target == modalDemo) { closeDemo(); }
+// Funções para o Modal de Particípios
+function openPart() { 
+    document.getElementById('partModal').style.display = 'block'; 
 }
+function closePart() { 
+    document.getElementById('partModal').style.display = 'none'; 
+}
+
+// Atualização do fecho universal (substitua a sua função anterior por esta)
+window.onclick = function(event) {
+    const modals = ['hintModal', 'demoModal', 'partModal'];
+    modals.forEach(id => {
+        let m = document.getElementById(id);
+        if (event.target == m) { m.style.display = 'none'; }
+    });
+}
+
+    
 </script>
 <div id="hintModal" class="modal">
     <div class="modal-content">
@@ -523,6 +540,46 @@ window.onclick = function(event) {
         </table>
         <p style="font-family: 'Didact Gothic', sans-serif; font-size: 0.85em; margin-top: 15px; color: #7f8c8d; font-style: italic;">
             * Nota: Na Questão 8, usamos o Dativo <strong>τούτῳ</strong> (de οὗτος).
+        </p>
+    </div>
+</div>
+    <div id="partModal" class="modal">
+    <div class="modal-content" style="max-width: 750px;">
+        <span class="close-modal" onclick="closePart()">&times;</span>
+        <h3 style="color: #1a3a5a; text-align: center; font-family: 'Alegreya', serif; margin-top: 0;">O Sistema dos Particípios</h3>
+        
+        <table class="autos-table">
+            <thead>
+                <tr>
+                    <th>Tempo</th>
+                    <th>Exemplo (Masc.)</th>
+                    <th>Sentido Temporal</th>
+                    <th>Tradução Comum</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Presente</strong></td>
+                    <td><span class="greek-sample">ἀκούων</span></td>
+                    <td>Ação Simultânea</td>
+                    <td>Ouvindo / Enquanto ouve</td>
+                </tr>
+                <tr>
+                    <td><strong>Aoristo</strong></td>
+                    <td><span class="greek-sample">ἀκούσας</span></td>
+                    <td>Ação Anterior</td>
+                    <td>Tendo ouvido / Após ouvir</td>
+                </tr>
+                <tr>
+                    <td><strong>Futuro</strong></td>
+                    <td><span class="greek-sample">λυσόμενος</span></td>
+                    <td>Intenção / Finalidade</td>
+                    <td>Para libertar / Que libertará</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-family: 'Didact Gothic', sans-serif; font-size: 0.85em; margin-top: 15px; color: #7f8c8d; font-style: italic;">
+            * Nota: O particípio futuro (Q15) é frequentemente usado com verbos de movimento para indicar <strong>propósito</strong>.
         </p>
     </div>
 </div>
