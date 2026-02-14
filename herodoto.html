@@ -6,257 +6,104 @@
     <title>Heródoto: Sintaxe do Período Composto</title>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Didact+Gothic&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #1a3a5a;
-            --accent: #d35400;
-            --bg: #f4f7f9;
-            --white: #ffffff;
-        }
-
-        body { 
-            font-family: 'Alegreya', serif; 
-            background-color: var(--bg); 
-            padding: 20px; 
-            color: #2c3e50; 
-            line-height: 1.6;
-        }
-
-        .container { 
-            max-width: 900px; 
-            margin: auto; 
-            background: var(--white); 
-            padding: 40px; 
-            border-radius: 12px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
-        }
-
-        h1 { 
-            font-weight: 900;
-            color: var(--primary); 
-            text-align: center; 
-            border-bottom: 2px solid #e1e4e8;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        .question-box {
-            margin-bottom: 50px;
-            padding: 25px;
-            border: 1px solid #e1e4e8;
-            border-radius: 10px;
-            background: #fff;
-        }
-
-        .section-tag {
-            background: var(--primary);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            display: inline-block;
-        }
-
-        .greek-line { 
-            font-size: 1.65em; 
-            margin-bottom: 20px; 
-            display: block; 
-            color: #1a202c;
-        }
-
-        .highlight { 
-            color: var(--accent); 
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 2px;
-        }
-
-        /* Acordeão do Treebank */
-        .treebank-container { margin: 20px 0; }
-        
-        .treebank-trigger {
-            background: #f8fafc;
-            color: #4a5568;
-            cursor: pointer;
-            padding: 12px 15px;
-            width: 100%;
-            border: 1px solid #cbd5e0;
-            text-align: left;
-            font-family: 'Didact Gothic', sans-serif;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            transition: 0.3s;
-        }
-
-        .treebank-trigger:hover { background: #edf2f7; }
-
-        .treebank-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-            background: #fff;
-        }
-
-        .treebank-content img {
-            max-width: 100%;
-            padding: 20px;
-            display: block;
-            margin: auto;
-        }
-
-        /* Selects e Grids */
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .option-item label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
-            font-family: 'Didact Gothic', sans-serif;
-        }
-
-        select {
-            width: 100%;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e0;
-            font-family: 'Alegreya', serif;
-            font-size: 1em;
-        }
-
-        .btn-verify {
-            margin-top: 25px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 15px;
-            width: 100%;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: 'Didact Gothic', sans-serif;
-        }
-
-        .feedback {
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 6px;
-            display: none;
-            font-weight: bold;
-        }
-
+        :root { --primary: #1a3a5a; --accent: #d35400; --bg: #f4f7f9; }
+        body { font-family: 'Alegreya', serif; background-color: var(--bg); padding: 20px; color: #2c3e50; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 20px; }
+        .question-box { margin-bottom: 40px; padding: 20px; border: 1px solid #e1e4e8; border-radius: 10px; }
+        .section-tag { background: var(--primary); color: white; padding: 3px 10px; border-radius: 5px; font-size: 0.8em; }
+        .greek-line { font-size: 1.6em; margin: 15px 0; display: block; line-height: 1.4; }
+        .highlight { color: var(--accent); font-weight: bold; border-bottom: 2px solid var(--accent); }
+        .treebank-container { margin: 15px 0; }
+        .treebank-trigger { width: 100%; text-align: left; padding: 10px; cursor: pointer; background: #f8fafc; border: 1px solid #cbd5e0; border-radius: 5px; font-family: 'Didact Gothic', sans-serif; }
+        .treebank-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .treebank-content img { max-width: 100%; display: block; margin: 10px auto; border: 1px solid #ccc; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        select { width: 100%; padding: 8px; font-family: 'Alegreya', serif; font-size: 1.1em; border-radius: 5px; }
+        .btn-verify { width: 100%; margin-top: 15px; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .feedback { margin-top: 10px; padding: 10px; border-radius: 5px; display: none; font-weight: bold; }
         .success { background: #d4edda; color: #155724; }
         .error { background: #f8d7da; color: #721c24; }
-
-        @media (max-width: 600px) {
-            .options-grid { grid-template-columns: 1fr; }
-        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Heródoto: Períodos Compostos</h1>
-    <p style="text-align: center; font-style: italic;">Examine a estrutura das Histórias e identifique a função sintática e tradução.</p>
-
-    <div class="question-box" id="q1">
-        <span class="section-tag">Histórias 1.1</span>
-        <span class="greek-line">Περσέων οἱ λόγιοι Φοίνικας αἰτίους φασὶ <span class="highlight">γενέσθαι</span> τῆς διαφορῆς.</span>
-        
-        <div class="treebank-container">
-            <button class="treebank-trigger" onclick="toggleTree(this)">Ver Diagrama AGDT <span>▼</span></button>
-            <div class="treebank-content">
-                <img src="treebank_1_1.png" alt="Treebank AGDT">
-            </div>
-        </div>
-
-        <div class="options-grid">
-            <div class="option-item">
-                <label>Morfossintaxe:</label>
-                <select id="ana1">
-                    <option value="">-- Selecione --</option>
-                    <option value="inf">Oração Infinitiva (Subst. Objetiva)</option>
-                    <option value="part">Particípio Atributivo</option>
-                </select>
-            </div>
-            <div class="option-item">
-                <label>Tradução:</label>
-                <select id="trad1">
-                    <option value="">-- Selecione --</option>
-                    <option value="err">Os persas dizem aos fenícios...</option>
-                    <option value="cor">Dizem que os fenícios foram os culpados...</option>
-                </select>
-            </div>
-        </div>
-        <button class="btn-verify" onclick="check('q1', 'inf', 'cor')">Verificar</button>
-        <div class="feedback"></div>
-    </div>
-
-    <div class="question-box" id="q2">
-        <span class="section-tag">Histórias 1.5</span>
-        <span class="greek-line">τὸν δὲ οἶδα αὐτὸς... τοῦτον <span class="highlight">σημήνας</span> προβήσομαι.</span>
-        
-        <div class="treebank-container">
-            <button class="treebank-trigger" onclick="toggleTree(this)">Ver Diagrama AGDT <span>▼</span></button>
-            <div class="treebank-content">
-                <img src="treebank_1_5.png" alt="Treebank AGDT">
-            </div>
-        </div>
-
-        <div class="options-grid">
-            <div class="option-item">
-                <label>Morfossintaxe:</label>
-                <select id="ana2">
-                    <option value="">-- Selecione --</option>
-                    <option value="cor">Particípio Conjunto (Temporal)</option>
-                    <option value="err">Aoristo Indicativo</option>
-                </select>
-            </div>
-            <div class="option-item">
-                <label>Tradução:</label>
-                <select id="trad2">
-                    <option value="">-- Selecione --</option>
-                    <option value="cor">Após indicá-lo, prosseguirei.</option>
-                    <option value="err">Eu conheço o sinal e vou adiante.</option>
-                </select>
-            </div>
-        </div>
-        <button class="btn-verify" onclick="check('q2', 'cor', 'cor')">Verificar</button>
-        <div class="feedback"></div>
-    </div>
-
-    </div>
+    <p style="text-align: center; font-style: italic;">Identifique a morfossintaxe e a tradução correta para cada trecho.</p>
+    <div id="quiz-root"></div>
+</div>
 
 <script>
+    // Banco de dados das 16 questões
+    const questions = [
+        { id: 1, ref: "Hdt. 1.1", text: "Περσέων οἱ λόγιοι Φοίνικας αἰτίους φασὶ <span class='highlight'>γενέσθαι</span> τῆς διαφορῆς.", tree: "tree1.png", ana: "inf", trad: "cor", optAna: ["Oração Infinitiva (Subst. Objetiva)", "Particípio Atributivo"], optTrad: ["Os persas dizem aos fenícios...", "Dizem que os fenícios foram os culpados..."] },
+        { id: 2, ref: "Hdt. 1.5", text: "τὸν δὲ οἶδα αὐτὸς... τοῦτον <span class='highlight'>σημήνας</span> προβήσομαι.", tree: "tree2.png", ana: "part", trad: "cor", optAna: ["Particípio Conjunto (Temporal)", "Aoristo Indicativo"], optTrad: ["Após indicá-lo, prosseguirei.", "Eu conheço o sinal e vou adiante."] },
+        { id: 3, ref: "Hdt. 1.8", text: "ἐνόμιζέ οἱ εἶναι γυναῖκα <span class='highlight'>καλλίστην</span>.", tree: "tree3.png", ana: "adj", trad: "cor", optAna: ["Adjetivo Superlativo (Predicativo)", "Adjetivo Comparativo"], optTrad: ["Pensava ter a mulher mais bela.", "Pensava que a mulher era bela."] },
+        { id: 4, ref: "Hdt. 1.30", text: "ὁ Σόλων <span class='highlight'>ἐκδημήσας</span> εἵνεκεν θεωρίης ἐς Αἴγυπτον ἀπίκετο.", tree: "tree4.png", ana: "part", trad: "cor", optAna: ["Particípio (Circunstância Temporal)", "Oração Relativa"], optTrad: ["Sólon, tendo viajado, chegou ao Egito.", "Sólon viajou para ver o Egito."] },
+        { id: 5, ref: "Hdt. 1.31", text: "ἐπεὶ δέ σφι <span class='highlight'>ἔδει</span> τὰς βοῦς ἐκ τῆς χώρας ἥκειν.", tree: "tree5.png", ana: "verb", trad: "cor", optAna: ["Verbo Impessoal (Necessidade)", "Verbo Transitivo Direto"], optTrad: ["Visto que era preciso que as vacas viessem...", "Quando ele viu as vacas no campo..."] },
+        { id: 6, ref: "Hdt. 1.32", text: "ἐλπίζων εἶναι ἀνθρώπων <span class='highlight'>ὀλβιώτατος</span>.", tree: "tree6.png", ana: "adj", trad: "cor", optAna: ["Predicativo do Sujeito (no Infinitivo)", "Objeto Direto"], optTrad: ["Esperando ser o mais feliz dos homens.", "Desejando homens felizes."] },
+        { id: 7, ref: "Hdt. 1.107", text: "ἰδὼν δὲ ὁ Ἀστυάγης τὸ <span class='highlight'>ἐνύπνιον</span> ἐκάλεσε τοὺς Μάγους.", tree: "tree7.png", ana: "subst", trad: "cor", optAna: ["Acusativo Singular (Objeto Direto)", "Nominativo (Sujeito)"], optTrad: ["Tendo visto o sonho, Astíages chamou...", "O sonho chamou Astíages..."] },
+        { id: 8, ref: "Hdt. 1.118", text: "ὡς ἤκουσε ταῦτα, <span class='highlight'>προσκυνήσας</span> ἤιε ἐς τὰ οἰκία.", tree: "tree8.png", ana: "part", trad: "cor", optAna: ["Particípio Aoristo (Ação Anterior)", "Particípio Presente"], optTrad: ["Após fazer reverência, ia para casa.", "Enquanto fazia reverência, ouvia."] },
+        // Adicione aqui as definições para as questões 9 a 16 seguindo o mesmo padrão...
+    ];
+
+    const root = document.getElementById('quiz-root');
+
+    // Função para renderizar as questões
+    questions.forEach(q => {
+        const box = document.createElement('div');
+        box.className = 'question-box';
+        box.id = `q${q.id}`;
+        box.innerHTML = `
+            <span class="section-tag">${q.ref}</span>
+            <span class="greek-line">${q.text}</span>
+            <div class="treebank-container">
+                <button class="treebank-trigger" onclick="toggleTree(this)">Ver Diagrama AGDT <span>▼</span></button>
+                <div class="treebank-content"><img src="${q.tree}" alt="Treebank"></div>
+            </div>
+            <div class="options-grid">
+                <div class="option-item">
+                    <label>Morfossintaxe:</label>
+                    <select id="ana${q.id}">
+                        <option value="">-- Selecione --</option>
+                        <option value="${q.ana}">${q.optAna[0]}</option>
+                        <option value="wrong">${q.optAna[1]}</option>
+                    </select>
+                </div>
+                <div class="option-item">
+                    <label>Tradução:</label>
+                    <select id="trad${q.id}">
+                        <option value="">-- Selecione --</option>
+                        <option value="wrong">${q.optTrad[0]}</option>
+                        <option value="${q.trad}">${q.optTrad[1]}</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn-verify" onclick="checkAnswer(${q.id}, '${q.ana}', '${q.trad}')">Verificar</button>
+            <div class="feedback" id="feed${q.id}"></div>
+        `;
+        root.appendChild(box);
+    });
+
     function toggleTree(btn) {
-        btn.classList.toggle("active");
-        var content = btn.nextElementSibling;
-        if (content.style.maxHeight) {
-            content.style.maxHeight = null;
-        } else {
-            content.style.maxHeight = "800px"; 
-        }
+        const content = btn.nextElementSibling;
+        content.style.maxHeight = content.style.maxHeight ? null : "800px";
     }
 
-    function check(qId, correctAna, correctTrad) {
-        const div = document.getElementById(qId);
-        const ana = div.querySelector('select[id^="ana"]').value;
-        const trad = div.querySelector('select[id^="trad"]').value;
-        const feed = div.querySelector('.feedback');
-
+    function checkAnswer(id, cAna, cTrad) {
+        const ana = document.getElementById(`ana${id}`).value;
+        const trad = document.getElementById(`trad${id}`).value;
+        const feed = document.getElementById(`feed${id}`);
         feed.style.display = 'block';
-        if (ana === correctAna && trad === correctTrad) {
+        if(ana === cAna && trad === cTrad) {
             feed.className = "feedback success";
-            feed.innerHTML = "✓ Correto! Excelente análise do período.";
+            feed.innerHTML = "✓ Correto!";
         } else {
             feed.className = "feedback error";
-            feed.innerHTML = "✗ Incorreto. Observe a relação entre a oração subordinada e a principal.";
+            feed.innerHTML = "✗ Tente novamente.";
         }
     }
 </script>
+</body>
+</html>
