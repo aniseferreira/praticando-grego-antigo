@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revisão: Flexão e Sintaxe (Xenofonte e outros)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Didact+Gothic&display=swap');
+
+        :root {
+            --primary: #1a3a5a;
+            --accent: #d35400;
+            --success: #27ae60;
+            --error: #c0392b;
+            --bg: #f4f7f6;
+        }
+
+        body { font-family: 'Alegreya', serif; background-color: var(--bg); color: #2c3e50; padding: 20px; }
+        .container { max-width: 850px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        
+        h1 { text-align: center; font-weight: 900; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 20px; }
+        .intro { text-align: center; font-family: 'Didact Gothic', sans-serif; margin-bottom: 30px; color: #666; }
+
+        .question-card { margin-bottom: 40px; padding: 25px; border: 1px solid #e1e8ed; border-radius: 10px; background: #fff; }
+        
+        .greek-text { font-size: 1.6em; display: block; margin-bottom: 10px; color: #1a1a1a; line-height: 1.5; }
+        .highlight { color: var(--accent); border-bottom: 2px dashed var(--accent); }
+
+        .hint-box { 
+            background: #fffdf0; border-left: 4px solid #f1c40f; padding: 10px 15px; 
+            margin-bottom: 20px; font-family: 'Didact Gothic', sans-serif; font-size: 0.95em; color: #7f8c8d;
+        }
+
+        .options-list { list-style: none; padding: 0; margin: 20px 0; }
+        .option-item { margin-bottom: 12px; }
+        
+        label { 
+            display: flex; align-items: center; padding: 12px; border: 1px solid #ddd; 
+            border-radius: 6px; cursor: pointer; transition: 0.2s; font-family: 'Didact Gothic', sans-serif;
+        }
+        label:hover { background-color: #f9f9f9; border-color: var(--primary); }
+        input[type="radio"] { margin-right: 15px; transform: scale(1.2); }
+
+        .btn-check { 
+            background: var(--primary); color: white; border: none; padding: 15px; 
+            border-radius: 6px; cursor: pointer; font-family: 'Didact Gothic', sans-serif;
+            font-weight: bold; width: 100%; text-transform: uppercase; transition: 0.3s;
+        }
+        .btn-check:hover { background: #2c5282; }
+
+        .feedback { 
+            margin-top: 20px; padding: 15px; border-radius: 6px; display: none; 
+            font-family: 'Didact Gothic', sans-serif; font-weight: bold;
+        }
+        .correct { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .wrong { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Praticando Flexão e Sintaxe</h1>
+    <p class="intro">Analise as sentenças abaixo e identifique as funções gramaticais corretas.</p>
+
+    <div id="quiz-container"></div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            sentence: "Na sentença de Xenofonte: 'ὁ δὲ <span class='highlight'>βασιλεὺς</span> ταύτῃ οὐκ ἦγεν'",
+            question: "Qual é a função sintática e o caso da palavra em destaque?",
+            hint: "Observe a terminação '-υς' da terceira declinação e o artigo 'ὁ'.",
+            options: [
+                "Possessivo, no Genitivo Singular",
+                "Sujeito, no Nominativo Singular",
+                "Objeto Direto, no Acusativo Singular",
+                "Vocativo, usado para chamamento"
+            ],
+            correct: 1,
+            explanation: "Correto! O artigo 'ὁ' é a marca inequívoca do Nominativo Masculino Singular, indicando o sujeito da frase."
+        },
+        {
+            sentence: "Na frase: 'οἱ θεοὶ <span class='highlight'>δῶρα</span> τοῖς ἀνθρώποις παρέχουσιν.'",
+            question: "Qual a função do termo destacado?",
+            hint: "Lembre-se que substantivos neutros têm a mesma forma para Nominativo e Acusativo Plural.",
+            options: [
+                "Sujeito, no Nominativo Plural",
+                "Objeto Indireto, no Dativo Plural",
+                "Objeto Direto, no Acusativo Plural",
+                "Adjunto Adnominal, no Genitivo"
+            ],
+            correct: 2,
+            explanation: "Exato! 'δῶρα' (de δῶρον) funciona como objeto direto do verbo 'oferecer'."
+        },
+        // Adicione as outras 8 questões seguindo este padrão
+    ];
+
+    const container = document.getElementById('quiz-container');
+
+    quizData.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.innerHTML = `
+            <span class="greek-text">${item.sentence}</span>
+            <p style="font-weight: bold; margin-bottom: 10px;">${item.question}</p>
+            <div class="hint-box"><strong>Dica:</strong> ${item.hint}</div>
+            <div class="options-list">
+                ${item.options.map((opt, i) => `
+                    <div class="option-item">
+                        <label>
+                            <input type="radio" name="q${index}" value="${i}">
+                            <span>${String.fromCharCode(65 + i)}. ${opt}</span>
+                        </label>
+                    </div>
+                `).join('')}
+            </div>
+            <button class="btn-check" onclick="checkAnswer(${index})">Verificar Resposta</button>
+            <div id="feed${index}" class="feedback"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    function checkAnswer(idx) {
+        const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+        const feedback = document.getElementById(`feed${idx}`);
+        
+        if (!selected) {
+            alert("Por favor, selecione uma das alternativas.");
+            return;
+        }
+
+        feedback.style.display = 'block';
+        if (parseInt(selected.value) === quizData[idx].correct) {
+            feedback.className = "feedback correct";
+            feedback.innerHTML = `✓ ${quizData[idx].explanation}`;
+        } else {
+            feedback.className = "feedback wrong";
+            feedback.innerHTML = `✗ Tente novamente! Analise o artigo e a terminação com cuidado.`;
+        }
+    }
+</script>
+
+</body>
+</html>
