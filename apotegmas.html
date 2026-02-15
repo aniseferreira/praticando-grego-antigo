@@ -262,6 +262,74 @@
         ]
     }
 ];
+    // 2. FUNÇÃO QUE DESENHA O HTML NA TELA
+function renderQuestions() {
+    const container = document.getElementById('questions-container');
+    if (!container) return;
+    
+    container.innerHTML = questions.map(q => `
+        <div class="question-box" id="q${q.id}">
+            <span class="greek-text">${q.greek}</span>
+            
+            <div class="section-title">Análise Morfossintática</div>
+            <button class="treebank-trigger" onclick="toggleTree(this)">Ver Diagrama AGDT <span>▼</span></button>
+            <div class="treebank-content">
+                <img src="${q.tree}" alt="Treebank" style="max-width:100%;">
+            </div>
+
+            <select id="morf${q.id}">
+                <option value="">-- Selecione a análise --</option>
+                ${q.morfOptions.map((opt, i) => `<option value="${i}">${opt.text}</option>`).join('')}
+            </select>
+
+            <div class="section-title">Tradução Correta</div>
+            <select id="trad${q.id}">
+                <option value="">-- Selecione a tradução --</option>
+                ${q.tradOptions.map((opt, i) => `<option value="${i}">${opt.text}</option>`).join('')}
+            </select>
+
+            <div id="feedback${q.id}" class="feedback"></div>
+            <button class="verify" style="background: #1a3a5a; color: white; border: none; padding: 10px; width: 100%; border-radius: 5px; cursor: pointer; margin-top: 10px;" onclick="checkAnswer(${q.id})">Verificar Respostas</button>
+        </div>
+    `).join('');
+}
+
+// 3. FUNÇÃO PARA ABRIR/FECHAR A ÁRVORE
+function toggleTree(btn) {
+    const content = btn.nextElementSibling;
+    content.classList.toggle('active');
+    const span = btn.querySelector('span');
+    span.textContent = content.classList.contains('active') ? '▲' : '▼';
+}
+
+// 4. FUNÇÃO DE VERIFICAÇÃO
+function checkAnswer(id) {
+    const q = questions.find(item => item.id === id);
+    const selectedMorfIndex = document.getElementById(`morf${id}`).value;
+    const selectedTradIndex = document.getElementById(`trad${id}`).value;
+    const feedback = document.getElementById(`feedback${id}`);
+
+    if (selectedMorfIndex === "" || selectedTradIndex === "") {
+        feedback.innerHTML = "⚠️ Por favor, selecione ambas as opções.";
+        feedback.style.color = "orange";
+        return;
+    }
+
+    const isMorfCorrect = q.morfOptions[selectedMorfIndex].correct;
+    const isTradCorrect = q.tradOptions[selectedTradIndex].correct;
+
+    if (isMorfCorrect && isTradCorrect) {
+        feedback.innerHTML = "✓ Correto! Excelente análise.";
+        feedback.style.color = "green";
+    } else {
+        feedback.innerHTML = "✗ Tente novamente. Verifique os tempos verbais e as relações sintáticas.";
+        feedback.style.color = "red";
+    }
+}
+
+// 5. INICIALIZAÇÃO
+window.onload = renderQuestions;
+</script>
 </script>
 
 </body>
