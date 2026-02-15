@@ -6,39 +6,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Didact+Gothic&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #1a3a5a; --accent: #f1c40f; --bg: #f8f9fa; }
-        
         body { font-family: 'Didact Gothic', sans-serif; background: var(--bg); color: #333; line-height: 1.6; padding: 20px; }
-        
         .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        
         h1 { font-family: 'Alegreya', serif; color: var(--primary); text-align: center; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
-        
-        .question-box { margin-bottom: 40px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; transition: 0.3s; }
-        
-        .greek-text { font-family: 'Alegreya', serif; font-size: 1.4em; color: #2c3e50; margin-bottom: 15px; display: block; line-height: 1.4; }
-        
-        .section-title { font-weight: bold; color: var(--primary); margin: 15px 0 10px; display: flex; align-items: center; gap: 10px; }
-        
-        select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%; margin-bottom: 10px; font-family: inherit; cursor: pointer; }
-        
-        .treebank-content { display: none; margin-top: 15px; text-align: center; border: 1px solid #eee; border-radius: 8px; padding: 10px; }
-        
-        .treebank-content.active { display: block; animation: fadeIn 0.3s; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .treebank-trigger { 
-            background: #eef2f7; border: 1px solid #d1d9e6; padding: 8px 15px; 
-            border-radius: 5px; cursor: pointer; font-family: inherit; width: 100%; 
-            display: flex; justify-content: space-between; align-items: center; color: #4a5568;
-        }
-
-        .feedback { font-weight: bold; margin-top: 10px; min-height: 1.5em; }
-
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(3px); }
-        
-        .modal-content { background: white; margin: 10% auto; padding: 25px; border-radius: 12px; width: 80%; max-width: 700px; position: relative; }
-        
+        .question-box { margin-bottom: 40px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; }
+        .greek-text { font-family: 'Alegreya', serif; font-size: 1.4em; color: #2c3e50; margin-bottom: 15px; display: block; }
+        .section-title { font-weight: bold; color: var(--primary); margin: 15px 0 10px; display: flex; align-items: center; justify-content: space-between; }
+        select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%; margin-bottom: 10px; font-family: inherit; }
+        .treebank-content { display: none; margin-top: 15px; text-align: center; border: 1px solid #eee; padding: 10px; }
+        .treebank-content.active { display: block; }
+        .treebank-trigger { background: #eef2f7; border: 1px solid #d1d9e6; padding: 8px; border-radius: 5px; cursor: pointer; width: 100%; display: flex; justify-content: space-between; }
+        .btn-hint { background: #fffdf0; border: 1px solid #f1c40f; color: #856404; padding: 4px 10px; border-radius: 15px; cursor: pointer; font-size: 0.8em; }
+        .feedback { font-weight: bold; margin-top: 10px; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+        .modal-content { background: white; margin: 10% auto; padding: 25px; border-radius: 12px; width: 80%; max-width: 600px; position: relative; }
         .close-modal { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; }
     </style>
 </head>
@@ -46,8 +27,6 @@
 
 <div class="container">
     <h1>Apotegmas e Discurso Reportado</h1>
-    <p style="text-align:center">Analise a morfossintaxe e a tradução dos ditos de Diógenes, Sócrates e outros.</p>
-
     <div id="questions-container"></div>
 </div>
 
@@ -64,8 +43,7 @@ const questions = [
         id: 1,
         greek: "Ὁ αὐτὸς θεασάμενος ἑταιρίδος υἱὸν λίθους εἰς ὄχλον βάλλοντα 'οὐκ εὐλαβῇ,' ἔφη, 'μή σου τὸν πατέρα πλήξῃς;'",
         tree: "img/apotegma_1.png",
-        // NOVO CAMPO:
-        hint: "<b>Partícula μή:</b> Aqui o <i>μή</i> introduz uma oração de precaução (fear clause) após o verbo <i>εὐλαβῇ</i>. Na árvore AGDT, ele recebe a etiqueta <b>AuxC</b>.",
+        hint: "<b>Partícula μή:</b> Segundo o Slide 17, após verbos de acautelamento (<i>εὐλαβέομαι</i>), o <i>μή</i> funciona como conjunção (AuxC) introduzindo uma oração de precaução.",
         morfOptions: [
             { text: "θεασάμενος (Aoristo Med.) e βάλλοντα (Pres. Ativo) concordando com υἱὸν; πλήξῃς (Subjuntivo de Cautela)", correct: true },
             { text: "θεασάμενος (Part. Futuro); πλήξῃς (Imperativo Negativo)", correct: false }
@@ -79,6 +57,7 @@ const questions = [
         id: 2,
         greek: "Διογένης θεασάμενος νεανίσκον καλλωπιζόμενον ἔφη · 'εἰ μὲν πρὸς ἄνδρας ἀτυχεῖς, εἰ δὲ πρὸς γυναῖκας ἀδικεῖς.'",
         tree: "img/apotegma_2.png",
+        hint: "<b>Particípio Predicativo:</b> Conforme o Slide 19, particípios que completam verbos de percepção (ver, ouvir) exercem função predicativa do objeto.",
         morfOptions: [
             { text: "θεασάμενος (Part. Aoristo Médio); καλλωπιζόμενον (Part. Presente Médio predicativo do objeto)", correct: true },
             { text: "θεασάμενος (Part. Presente); καλλωπιζόμενον (Infinitivo Futuro)", correct: false }
@@ -92,6 +71,7 @@ const questions = [
         id: 3,
         greek: "Διογένης ἐρωτηθεὶς τί τὸ κάλλιστον ἐν ἀνθρώποις ἔφη · 'γλῶσσα φειδωλός.'",
         tree: "img/apotegma_3.png",
+        hint: "<b>Interrogativa Indireta:</b> O pronome τί introduz uma pergunta reportada. O particípio ἐρωτηθεὶς indica a circunstância da fala (Slide 15).",
         morfOptions: [
             { text: "ἐρωτηθεὶς (Part. Aoristo Passivo); τί τὸ κάλλιστον (Interrogativa indireta com elipse do verbo εἶναι)", correct: true },
             { text: "ἐρωτηθεὶς (Part. Aoristo Ativo); κάλλιστον (Adjetivo Comparativo)", correct: false }
@@ -103,8 +83,9 @@ const questions = [
     },
     {
         id: 4,
-        greek: "Ὁ αὐτὸς ἔφη μᾶλλον ἐθέλειν ἐν πεπαιδευμένοις ἀποτυγχάνειν ἢ ἐν ἀπαιδεύτοις ἐπιτυγχάνειν.",
+        greek: "Ὁ αὐτὸς ἔφη μᾶλλον ἐθέleiν ἐν πεπαιδευμένοις ἀποτυγχάνειν ἢ ἐν ἀπαιδεύτοις ἐπιτυγχάνειν.",
         tree: "img/apotegma_4.png",
+        hint: "<b>Infinitivos:</b> Aqui temos uma série de infinitivos em função de objeto do verbo principal (ἔφη). Veja o Slide 26 sobre Infinitivos.",
         morfOptions: [
             { text: "ἐθέλειν, ἀποτυγχάνειν, ἐπιτυγχάνειν (Infinitivos Presentes); πεπαιδευμένοις (Part. Perfeito Passivo substantivado)", correct: true },
             { text: "ἐθέλειν (Verbo principal); πεπαιδευμένοις (Adjetivo no Acusativo plural)", correct: false }
@@ -118,8 +99,9 @@ const questions = [
         id: 5,
         greek: "Ὁ αὐτὸς εἰπόντος τινὸς ὅτι 'καταγελῶσι σου οἱ ἄνθρωποι' ἔφη · 'ἐγὼ δὲ οὐ καταγελῶμαι.'",
         tree: "img/apotegma_5.png",
+        hint: "<b>Genitivo Absoluto:</b> A construção <i>εἰπόντος τινὸς</i> é uma oração participial livre (Slide 15). O ὅτι introduz o discurso direto.",
         morfOptions: [
-            { text: "εἰπόντος τινὸς (Genitivo Absoluto); ὅτι (Oração integrante introduzindo discurso direto); καταγελῶμαι (Presente Passivo)", correct: true },
+            { text: "εἰπόντος τινὸς (Genitivo Absoluto); ὅτι (Oração integrante); καταγελῶμαι (Presente Passivo)", correct: true },
             { text: "εἰπόντος (Part. Presente no Dativo); ὅti (Oração causal); καταγελῶμαι (Médio Depoente)", correct: false }
         ],
         tradOptions: [
@@ -131,6 +113,7 @@ const questions = [
         id: 6,
         greek: "Ὁ αὐτὸς λοιδορούμενος ὑπό τινος ἀναισχύντου ἔφη· 'ὦ οὖτος, οὐ κόρας ἔχεις ἐν toῖς ὀφθαλμοῖς, ἀλλà πόρνας.'",
         tree: "img/apotegma_6.png",
+        hint: "<b>Agente da Passiva:</b> A preposição ὑπό + Genitivo indica quem realiza a ação em uma oração passiva (Slide 17).",
         morfOptions: [
             { text: "λοιδορούμενος (Part. Pres. Passivo concordando com o sujeito); ὑπό + genitivo (Agente da Passiva)", correct: true },
             { text: "λοιδορούμενος (Part. Aoristo Médio); ὑπό + genitivo (Complemento de lugar)", correct: false }
@@ -144,9 +127,10 @@ const questions = [
         id: 7,
         greek: "Ὁ αὐτὸς εἶπε τοὺς ἀπαιδεύτους μόνῃ τῇ μορφῇ διαφέρειν τῶν θηρίων.",
         tree: "img/apotegma_7.png",
+        hint: "<b>Acusativo com Infinitivo:</b> Construção clássica de discurso indireto (Slide 26). τοὺς ἀπαιδεύτους é o sujeito do infinitivo.",
         morfOptions: [
-            { text: "Acusativo com Infinitivo: τοὺς ἀπαιδεύτους (Sujeito) e διαφέρειν (Verbo); τῶν θηρίων (Ablativo de separação/comparação)", correct: true },
-            { text: "τοὺς ἀπαιδεύτους (Objeto Direto); διαφέρειν (Infinitivo de finalidade); θηρίων (Genitivo possessivo)", correct: false }
+            { text: "Acusativo com Infinitivo: τοὺς ἀπαιδεύτους (Sujeito) e διαφέρειν (Verbo); τῶν θηρίων (Ablativo de separação)", correct: true },
+            { text: "τοὺς ἀπαιδεύτους (Objeto Direto); διαφέρειν (Infinitivo de finalidade)", correct: false }
         ],
         tradOptions: [
             { text: "O mesmo disse que os ignorantes diferem das feras apenas pela forma.", correct: true },
@@ -157,9 +141,10 @@ const questions = [
         id: 8,
         greek: "Ὁ αὐτὸς ἔφη τοὺς ἀπαιδεύτους ἐν τοῖς ζῶσι νεκροὺς περιπατεῖν.",
         tree: "img/apotegma_8.png",
+        hint: "<b>Particípio Substantivado:</b> <i>τοῖς ζῶσι</i> (aqueles que vivem). O artigo transforma o particípio em um substantivo (Slide 19).",
         morfOptions: [
-            { text: "τοὺς ἀπαιδεύτους (Sujeito do infinitivo); τοῖς ζῶσι (Part. Pres. Ativo substantivado no dativo plural); περιπατεῖν (Infinitivo)", correct: true },
-            { text: "τοὺς ἀπαιδεύτους (Vocativo); ζῶσι (Verbo principal no dativo); περιπατεῖν (Particípio)", correct: false }
+            { text: "τοὺς ἀπαιδεύτους (Sujeito do infinitivo); τοῖς ζῶσι (Part. Pres. Ativo substantivado); περιπατεῖν (Infinitivo)", correct: true },
+            { text: "τοὺς ἀπαιδεύτους (Vocativo); ζῶσι (Verbo principal no dativo)", correct: false }
         ],
         tradOptions: [
             { text: "O mesmo dizia que os ignorantes caminham como mortos entre os vivos.", correct: true },
@@ -170,8 +155,9 @@ const questions = [
         id: 9,
         greek: "Πλάτων ἔφη τὴν ἀρετὴν ἀδέσποτον εἶναι.",
         tree: "img/apotegma_9.png",
+        hint: "<b>Predicativo no Acusativo:</b> Em orações de infinitivo, tanto o sujeito quanto o seu predicativo (ἀδέσποτον) vão para o acusativo (Slide 26).",
         morfOptions: [
-            { text: "Discurso Indireto (Acusativo com Infinitivo): τὴν ἀρετὴν (Sujeito) e εἶναι (Verbo); ἀδέσποτον (Predicativo)", correct: true },
+            { text: "Discurso Indireto: τὴν ἀρετὴν (Sujeito) e εἶναι (Verbo); ἀδέσποτον (Predicativo)", correct: true },
             { text: "τὴν ἀρετὴν (Objeto Direto); ἀδέσποτον (Sujeito)", correct: false }
         ],
         tradOptions: [
@@ -183,13 +169,14 @@ const questions = [
         id: 10,
         greek: "Θεόκριτος ἐρωτηθεὶς 'διὰ τί τοὺς πονηροὺς καὶ ἀγαθοὺς μισεῖς' ἔφη· τοὺς μὲν πονηροὺς διὰ τὴν μοχθηρίαν, τοὺς δὲ ἀγαθοὺς, ὅτι τοὺς κακοὺς οὐ μισοῦσιν.",
         tree: "img/apotegma_10.png",
+        hint: "<b>Oração Causal:</b> O ὅτι aqui introduz a razão (causa) de Teócrito odiar os bons. (Slide 17).",
         morfOptions: [
-            { text: "ἐρωτηθεὶς (Part. Aoristo Passivo); ὅτι (Oração causal); τοὺς πονηροὺς/τοὺς ἀγαθοὺς (Adjetivos substantivados)", correct: true },
-            { text: "ἐρωτηθεὶς (Part. Pres. Ativo); ὅτι (Oração integrante); μισοῦσιν (Infinitivo)", correct: false }
+            { text: "ἐρωτηθεὶς (Part. Aoristo Passivo); ὅτι (Oração causal); τοὺς πονηροὺς (Adjetivos substantivados)", correct: true },
+            { text: "ἐρωτηθεὶς (Part. Pres. Ativo); ὅτι (Oração integrante)", correct: false }
         ],
         tradOptions: [
             { text: "Teócrito, interrogado sobre 'por que odeias os maus e os bons', disse: 'os maus por causa da maldade, e os bons porque não odeiam os maus'.", correct: true },
-            { text: "Teócrito perguntou por que odiavam os bons e disse que a maldade dos maus não era odiada pelos bons.", correct: false }
+            { text: "Teócrito perguntou por que odiavam os bons.", correct: false }
         ]
     }
 ];
@@ -197,32 +184,26 @@ const questions = [
 function renderQuestions() {
     const container = document.getElementById('questions-container');
     if (!container) return;
-    
     container.innerHTML = questions.map(q => `
-        <div class="question-box" id="q${q.id}">
+        <div class="question-box">
             <span class="greek-text">${q.greek}</span>
-            
-            <div class="section-title">Análise Morfossintática</div>
-            <button class="btn-hint" onclick="openHint('${q.hint.replace(/'/g, "\\'")}')" style="margin-left:10px; cursor:pointer">🔍 Lupa</button>
-            <button class="treebank-trigger" onclick="toggleTree(this)">Ver Diagrama AGDT <span>▼</span></button>
-            <div class="treebank-content">
-                <img src="${q.tree}" alt="Treebank" style="max-width:100%;">
+            <div class="section-title">
+                Análise Morfossintática
+                <button class="btn-hint" onclick="openHint('${q.hint.replace(/'/g, "\\'")}')">🔍 Lupa</button>
             </div>
-            
-
+            <button class="treebank-trigger" onclick="toggleTree(this)">Ver Diagrama AGDT <span>▼</span></button>
+            <div class="treebank-content"><img src="${q.tree}" style="max-width:100%;"></div>
             <select id="morf${q.id}">
                 <option value="">-- Selecione a análise --</option>
                 ${q.morfOptions.map((opt, i) => `<option value="${i}">${opt.text}</option>`).join('')}
             </select>
-
             <div class="section-title">Tradução Correta</div>
             <select id="trad${q.id}">
                 <option value="">-- Selecione a tradução --</option>
                 ${q.tradOptions.map((opt, i) => `<option value="${i}">${opt.text}</option>`).join('')}
             </select>
-
             <div id="feedback${q.id}" class="feedback"></div>
-            <button class="verify" style="background: var(--primary); color: white; border: none; padding: 12px; width: 100%; border-radius: 5px; cursor: pointer; margin-top: 10px; font-weight: bold;" onclick="checkAnswer(${q.id})">Verificar Respostas</button>
+            <button style="background:var(--primary);color:white;border:none;padding:10px;width:100%;border-radius:5px;cursor:pointer;font-weight:bold;" onclick="checkAnswer(${q.id})">Verificar</button>
         </div>
     `).join('');
 }
@@ -230,61 +211,34 @@ function renderQuestions() {
 function toggleTree(btn) {
     const content = btn.nextElementSibling;
     content.classList.toggle('active');
-    const span = btn.querySelector('span');
-    span.textContent = content.classList.contains('active') ? '▲' : '▼';
+    btn.querySelector('span').textContent = content.classList.contains('active') ? '▲' : '▼';
 }
-    // Função para abrir o modal com o conteúdo da Lupa
+
 function openHint(text) {
-    const modal = document.getElementById('hintModal');
-    const content = document.getElementById('hintContent');
-    
-    // Insere o texto da explicação (pode usar HTML para negrito/itálico)
-    content.innerHTML = `<h3 style="color:var(--primary)">Lupa Gramatical</h3>${text}`;
-    
-    // Exibe o modal
-    modal.style.display = 'block';
-}
-
-// Função para fechar o modal
-function closeHint() {
-    document.getElementById('hintModal').style.display = 'none';
-}
-
-// Fecha o modal se o usuário clicar fora da caixa branca
-window.onclick = function(event) {
-    const modal = document.getElementById('hintModal');
-    if (event.target == modal) {
-        closeHint();
-    }
-
-function checkAnswer(id) {
-    const q = questions.find(item => item.id === id);
-    const selectedMorfIndex = document.getElementById(`morf${id}`).value;
-    const selectedTradIndex = document.getElementById(`trad${id}`).value;
-    const feedback = document.getElementById(`feedback${id}`);
-
-    if (selectedMorfIndex === "" || selectedTradIndex === "") {
-        feedback.innerHTML = "⚠️ Selecione as duas opções para verificar.";
-        feedback.style.color = "orange";
-        return;
-    }
-
-    const isMorfCorrect = q.morfOptions[selectedMorfIndex].correct;
-    const isTradCorrect = q.tradOptions[selectedTradIndex].correct;
-
-    if (isMorfCorrect && isTradCorrect) {
-        feedback.innerHTML = "✓ Correto! Excelente análise.";
-        feedback.style.color = "green";
-    } else {
-        feedback.innerHTML = "✗ Tente novamente. Observe os tempos e a sintaxe.";
-        feedback.style.color = "red";
-    }
+    document.getElementById('hintContent').innerHTML = `<h3 style="color:var(--primary)">Lupa Gramatical</h3>${text}`;
+    document.getElementById('hintModal').style.display = 'block';
 }
 
 function closeHint() { document.getElementById('hintModal').style.display = 'none'; }
 
+window.onclick = function(event) {
+    if (event.target == document.getElementById('hintModal')) closeHint();
+};
+
+function checkAnswer(id) {
+    const q = questions.find(item => item.id === id);
+    const mIdx = document.getElementById(`morf${id}`).value;
+    const tIdx = document.getElementById(`trad${id}`).value;
+    const fb = document.getElementById(`feedback${id}`);
+    if (mIdx === "" || tIdx === "") { fb.innerHTML = "⚠️ Selecione as duas!"; fb.style.color = "orange"; return; }
+    if (q.morfOptions[mIdx].correct && q.tradOptions[tIdx].correct) {
+        fb.innerHTML = "✓ Correto!"; fb.style.color = "green";
+    } else {
+        fb.innerHTML = "✗ Tente novamente."; fb.style.color = "red";
+    }
+}
+
 window.onload = renderQuestions;
 </script>
-
 </body>
 </html>
