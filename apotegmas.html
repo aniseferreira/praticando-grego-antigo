@@ -5,6 +5,36 @@
     <title>Apotegmas: Discurso e Morfossintaxe</title>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,700;1,400&family=Didact+Gothic&display=swap" rel="stylesheet">
     <style>
+
+
+.treebank-content {
+    display: none; 
+    margin-top: 15px;
+    text-align: center; /* Centraliza a imagem da árvore */
+}
+
+.treebank-content.active {
+    display: block; 
+    animation: fadeIn 0.3s; /* Um efeito suave de aparecimento */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.treebank-trigger {
+    background: #eef2f7;
+    border: 1px solid #d1d9e6;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
         /* Reutilizando seu CSS elegante */
         :root { --primary: #1a3a5a; --accent: #f1c40f; --bg: #f8f9fa; }
         body { font-family: 'Didact Gothic', sans-serif; background: var(--bg); color: #333; line-height: 1.6; padding: 20px; }
@@ -23,6 +53,8 @@
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(3px); }
         .modal-content { background: white; margin: 10% auto; padding: 25px; border-radius: 12px; width: 80%; max-width: 700px; position: relative; }
         .close-modal { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; }
+
+        
     </style>
 </head>
 <body>
@@ -98,21 +130,138 @@
 </div>
 
 <script>
-    function verify(qId, correctMorf, correctTrad) {
-        const morf = document.getElementById('morf' + qId.replace('q','')).value;
-        const trad = document.getElementById('trad' + qId.replace('q','')).value;
-        const feedback = document.getElementById('feedback' + qId.replace('q',''));
-
-        if (morf === correctMorf && trad === correctTrad) {
-            feedback.style.color = "green";
-            feedback.innerHTML = "✓ Correto! Excelente análise do discurso reportado.";
-        } else {
-            feedback.style.color = "red";
-            feedback.innerHTML = "✗ Tente novamente. Observe os tempos dos particípios e a função dos infinitivos.";
-        }
+    const questions = [
+    {
+        id: 1,
+        greek: "Ὁ αὐτὸς θεασάμενος ἑταιρίδος υἱὸν λίθους εἰς ὄχλον βάλλοντα 'οὐκ εὐλαβῇ,' ἔφη, 'μή σου τὸν πατέρα πλήξῃς;'",
+        tree: "img/apotegma_1.png", // Nomeie sua imagem assim
+        morfOptions: [
+            { text: "θεασάμενος (Aoristo Med.) e βάλλοντα (Pres. Ativo) concordando com υἱὸν; πλήξῃς (Subjuntivo de Cautela)", correct: true },
+            { text: "θεασάμενος (Part. Futuro); πλήξῃς (Imperativo Negativo)", correct: false }
+        ],
+        tradOptions: [
+            { text: "O mesmo, tendo visto o filho de uma cortesã jogando pedras na multidão, disse: 'Não te acautelas, para não atingires teu pai?'", correct: true },
+            { text: "Ele mesmo, vendo a cortesã e o filho jogando pedras, disse: 'Cuidado para que teu pai não te bata'.", correct: false }
+        ]
+    },
+    {
+        id: 2,
+        greek: "Διογένης θεασάμενος νεανίσκον καλλωπιζόμενον ἔφη · 'εἰ μὲν πρὸς ἄνδρας ἀτυχεῖς, εἰ δὲ πρὸς γυναῖκας ἀδικεῖς.'",
+        tree: "img/apotegma_2.png",
+        morfOptions: [
+            { text: "καλλωπιζόμενον: Particípio Presente Médio em função predicativa (objeto de θεασάμενος)", correct: true },
+            { text: "καλλωπιζόμενον: Adjetivo substantivado no Genitivo dependente de νεανίσκον", correct: false }
+        ],
+        tradOptions: [
+            { text: "Diógenes, tendo visto um jovem se embelezando, disse: 'Se for para homens, és infeliz; se para mulheres, és injusto'.", correct: true },
+            { text: "Diógenes, vendo um jovem belo, disse: 'Se és homem, tens azar; se és mulher, és injusta'.", correct: false }
+        ]
+    },
+    {
+        id: 3,
+        greek: "Ὁ αὐτὸς ἐρωτηθεὶς διὰ τί συντάγματα οὐ γράφει ἔφη· 'ὅτι τὰ ἄγραφα τῶν γεγραμμένων ὁρῶ πλείονος πωλούμενα.'",
+        tree: "img/apotegma_3.png",
+        morfOptions: [
+            { text: "ἐρωτηθεὶς (Part. Aoristo Passivo); πλείονος (Genitivo de Preço); πωλούμενα (Part. Pres. Passivo predicativo)", correct: true },
+            { text: "ἐρωτηθεὶς (Part. Futuro); πλείονος (Comparativo de superioridade no Dativo)", correct: false }
+        ],
+        tradOptions: [
+            { text: "O mesmo, interrogado por que não escreve livros, disse: 'Porque vejo as coisas não escritas serem vendidas por mais que as escritas'.", correct: true },
+            { text: "Ele disse que não escrevia porque as coisas escritas valem menos que as faladas.", correct: false }
+        ]
+    },
+    {
+        id: 4,
+        greek: "Ὁ αὐτὸς τὰς εὐειδεῖς ἑταίρας θανάσιμον ἔλεγε μελίκρατον εἶναι.",
+        tree: "img/apotegma_4.png",
+        morfOptions: [
+            { text: "Oração de Infinitivo (Acusativo com Infinitivo): ἑταίρας (Sujeito) e εἶναι (Verbo)", correct: true },
+            { text: "ἔλεγε (Verbo de cautela); εἶναι (Infinitivo de finalidade)", correct: false }
+        ],
+        tradOptions: [
+            { text: "O mesmo dizia que as belas cortesãs eram um hidromel mortal.", correct: true },
+            { text: "Ele dizia às belas cortesãs que o hidromel era mortal.", correct: false }
+        ]
     }
-
-    function closeHint() { document.getElementById('hintModal').style.display = 'none'; }
+        {
+        id: 5,
+        greek: "Σωκράτης ὁ φιλόσοφος ἐρωτηθεὶς τί ἥδιστον ἐν τῷ βίῳ εἶπεν· 'παιδεία καὶ ἀρετὴ καὶ ἱστορία ἀγνοουμένων.'",
+        tree: "img/apotegma_5.png",
+        morfOptions: [
+            { text: "ἐρωτηθεὶς (Part. Aoristo Passivo); ἥδιστον (Superlativo de ἡδύς); ἀγνοουμένων (Part. Pres. Passivo substantivado)", correct: true },
+            { text: "ἐρωτηθεὶς (Part. Pres. Médio); ἥδιστον (Adjetivo Comparativo); ἀγνοουμένων (Gerúndio Ativo)", correct: false }
+        ],
+        tradOptions: [
+            { text: "Sócrates, o filósofo, interrogado sobre o que é mais agradável na vida, disse: 'Educação, virtude e a investigação das coisas ignoradas'.", correct: true },
+            { text: "Sócrates perguntou o que era doce na vida e disse que a educação era a história dos ignorantes.", correct: false }
+        ]
+    },
+    {
+        id: 6,
+        greek: "Ὁ αὐτὸς ἐρωτηθεὶς διà τί συντάγματα οὐ γράφει ἔφη· 'ὅτι τὰ ἄγραφα τῶν γεγραμμένων ὁρῶ πλείονος πωλούμενα.'",
+        tree: "img/apotegma_6.png",
+        morfOptions: [
+            { text: "Oração com ὅτι (causal); τὰ ἄγραφα/τῶν γεγραμμένων (Particípios Perfeitos substantivados); πωλούμενα (Particípio Predicativo após ὁρῶ)", correct: true },
+            { text: "Oração com ὅτι (objetiva); τὰ ἄγραφα (Adjetivo simples); πωλούμενα (Infinitivo de finalidade)", correct: false }
+        ],
+        tradOptions: [
+            { text: "O mesmo, interrogado por que não escreve tratados, disse: 'Porque vejo que as coisas não escritas são vendidas por mais que as escritas'.", correct: true },
+            { text: "Ele disse que não escrevia porque via as coisas escritas serem vendidas por preços menores.", correct: false }
+        ]
+    },
+    {
+        id: 7,
+        greek: "Ἀριστοτέλης ἐρωτηθεὶς ποῦ κατοικοῦσιν αἱ Μοῦσαι ἔφη· 'ἐν ταῖς ψυχαῖς τῶν φιλοπόνων.'",
+        tree: "img/apotegma_7.png",
+        morfOptions: [
+            { text: "ἐρωτηθεὶς (Particípio Apositivo); ποῦ κατοικοῦσιν (Interrogativa Indireta com Indicativo)", correct: true },
+            { text: "ἐρωτηθεὶς (Verbo Principal); ποῦ κατοικοῦσιν (Oração Relativa com Optativo)", correct: false }
+        ],
+        tradOptions: [
+            { text: "Aristóteles, interrogado sobre onde habitam as Musas, disse: 'Nas almas dos que amam o trabalho'.", correct: true },
+            { text: "Aristóteles perguntou onde moravam as Musas e elas disseram: 'Nas almas dos filósofos'.", correct: false }
+        ]
+    },
+    {
+        id: 8,
+        greek: "Πλάτων ὁ φιλόσοφος ἐρωτηθεὶς ὑπό τινος πῶς ἂν ἄριστα διοικοῖντο αἱ πόλεις εἶπεν· 'ἐὰν οἱ φιλόσοφοι βασιλεύσωσιν ἢ οἱ βασιλεῖς φιλοσοφήσωσιν.'",
+        tree: "img/apotegma_8.png",
+        morfOptions: [
+            { text: "πῶς ἂν διοικοῖντο (Interrogativa Indireta com Optativo Potencial); ἐὰν... βασιλεύσωσιν (Condicional de Eventualidade/Futuro)", correct: true },
+            { text: "πῶς ἂn διοικοῖντο (Indicativo Futuro); ἐὰν... βασιλεύσωσιν (Oração de Cautela com Subjuntivo)", correct: false }
+        ],
+        tradOptions: [
+            { text: "Platão, interrogado por alguém como as cidades seriam melhor administradas, disse: 'Se os filósofos reinarem ou os reis filosofarem'.", correct: true },
+            { text: "Platão disse que as cidades são bem administradas quando os filósofos são reis e os reis são filósofos.", correct: false }
+        ]
+    },
+    {
+        id: 9,
+        greek: "Ὁ αὐτὸς ἔλεγεν ὅτι ὁ παιδευόμενος τριῶν τούτων χρῄζει· φύσεως, μελέτης, χρόνου.",
+        tree: "img/apotegma_9.png",
+        morfOptions: [
+            { text: "Oração com ὅτι (declarativa); ὁ παιδευόμενος (Particípio Presente Passivo substantivado); χρῄζει (Verbo que rege Genitivo)", correct: true },
+            { text: "Oração com ὅτι (causal); ὁ παιδευόμενος (Adjetivo); χρῄζει (Verbo que rege Acusativo)", correct: false }
+        ],
+        tradOptions: [
+            { text: "O mesmo dizia que aquele que está sendo educado precisa de três coisas: natureza, exercício e tempo.", correct: true },
+            { text: "Ele dizia que a educação precisa de três tipos de pessoas: naturais, aplicadas e velhas.", correct: false }
+        ]
+    },
+    {
+        id: 10,
+        greek: "Ἡρόδοτος ἔφη· 'αὐξανομένῳ τῷ σώματι συναύξονται καὶ αἱ φρένες, γηράσκοντι δὲ συγγηράσκουσιν.'",
+        tree: "img/apotegma_10.png",
+        morfOptions: [
+            { text: "αὐξανομένῳ / γηράσκοντι (Particípios Presentes em Dativo de Concordância com σώματι); uso expressivo de verbos compostos com σύν", correct: true },
+            { text: "αὐξανομένῳ / γηράσκοντι (Infinitivos de Finalidade); σώματι (Sujeito da oração principal)", correct: false }
+        ],
+        tradOptions: [
+            { text: "Heródoto dizia: 'Com o corpo que cresce, cresce junto também a mente; com o que envelhece, ela envelhece junto'.", correct: true },
+            { text: "Heródoto disse que o corpo aumenta e a mente também, mas que o velho não envelhece a mente.", correct: false }
+        ]
+    }
+];
 </script>
 
 </body>
