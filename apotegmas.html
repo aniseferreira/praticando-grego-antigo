@@ -64,6 +64,8 @@ const questions = [
         id: 1,
         greek: "Ὁ αὐτὸς θεασάμενος ἑταιρίδος υἱὸν λίθους εἰς ὄχλον βάλλοντα 'οὐκ εὐλαβῇ,' ἔφη, 'μή σου τὸν πατέρα πλήξῃς;'",
         tree: "img/apotegma_1.png",
+        // NOVO CAMPO:
+        hint: "<b>Partícula μή:</b> Aqui o <i>μή</i> introduz uma oração de precaução (fear clause) após o verbo <i>εὐλαβῇ</i>. Na árvore AGDT, ele recebe a etiqueta <b>AuxC</b>.",
         morfOptions: [
             { text: "θεασάμενος (Aoristo Med.) e βάλλοντα (Pres. Ativo) concordando com υἱὸν; πλήξῃς (Subjuntivo de Cautela)", correct: true },
             { text: "θεασάμενος (Part. Futuro); πλήξῃς (Imperativo Negativo)", correct: false }
@@ -201,10 +203,12 @@ function renderQuestions() {
             <span class="greek-text">${q.greek}</span>
             
             <div class="section-title">Análise Morfossintática</div>
+            <button class="btn-hint" onclick="openHint('${q.hint.replace(/'/g, "\\'")}')" style="margin-left:10px; cursor:pointer">🔍 Lupa</button>
             <button class="treebank-trigger" onclick="toggleTree(this)">Ver Diagrama AGDT <span>▼</span></button>
             <div class="treebank-content">
                 <img src="${q.tree}" alt="Treebank" style="max-width:100%;">
             </div>
+            
 
             <select id="morf${q.id}">
                 <option value="">-- Selecione a análise --</option>
@@ -229,6 +233,29 @@ function toggleTree(btn) {
     const span = btn.querySelector('span');
     span.textContent = content.classList.contains('active') ? '▲' : '▼';
 }
+    // Função para abrir o modal com o conteúdo da Lupa
+function openHint(text) {
+    const modal = document.getElementById('hintModal');
+    const content = document.getElementById('hintContent');
+    
+    // Insere o texto da explicação (pode usar HTML para negrito/itálico)
+    content.innerHTML = `<h3 style="color:var(--primary)">Lupa Gramatical</h3>${text}`;
+    
+    // Exibe o modal
+    modal.style.display = 'block';
+}
+
+// Função para fechar o modal
+function closeHint() {
+    document.getElementById('hintModal').style.display = 'none';
+}
+
+// Fecha o modal se o usuário clicar fora da caixa branca
+window.onclick = function(event) {
+    const modal = document.getElementById('hintModal');
+    if (event.target == modal) {
+        closeHint();
+    }
 
 function checkAnswer(id) {
     const q = questions.find(item => item.id === id);
