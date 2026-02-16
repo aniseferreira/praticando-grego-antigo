@@ -329,7 +329,7 @@ function renderQuestions() {
             <span class="greek-text">${q.greek}</span>
             <div class="section-title">
                 Análise Morfossintática
-                <button class="btn-hint" onclick="openHint('${q.hint.replace(/'/g, "\\'")}')">🔍 Lupa</button>
+                <button class="btn-hint" onclick="openHint('${q.hint.replace(/'/g, "\\'")}')">🔍 Sherlock</button>
             </div>
             <button class="treebank-trigger" onclick="toggleTree(this)">Ver Diagrama AGDT <span>▼</span></button>
             <div class="treebank-content"><img src="${q.tree}" style="max-width:100%;"></div>
@@ -355,7 +355,7 @@ function toggleTree(btn) {
 }
 
 function openHint(text) {
-    document.getElementById('hintContent').innerHTML = `<h3 style="color:var(--primary)">Lupa Gramatical</h3>${text}`;
+    document.getElementById('hintContent').innerHTML = `<h3 style="color:var(--primary)">Sherlock Gramatical</h3>${text}`;
     document.getElementById('hintModal').style.display = 'block';
 }
 
