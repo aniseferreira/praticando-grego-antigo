@@ -178,7 +178,147 @@ const questions = [
             { text: "Teócrito, interrogado sobre 'por que odeias os maus e os bons', disse: 'os maus por causa da maldade, e os bons porque não odeiam os maus'.", correct: true },
             { text: "Teócrito perguntou por que odiavam os bons.", correct: false }
         ]
+    }, {
+        id: 11,
+        greek: "Σωκράτης ἔφη τοὺς μὲν ἄλλους ἀνθρώπους ζῆν ἵνα ἐσθίοιεν, αὐτὸν δὲ ἐσθίειν ἵνα ζῴη.",
+        tree: "img/apotegma_11.png",
+        hint: "<b>Optativo de Obliquidade:</b> Após um tempo histórico (ἔφη), a conjunção final ἵνα pode vir com o modo Optativo (Slide 16).",
+        morfOptions: [
+            { text: "ζῆν, ἐσθίειν (Infinitivos); ἐσθίοιεν, ζῴη (Optativos de finalidade)", correct: true },
+            { text: "ζῆν, ἐσθίειν (Particípios); ἐσθίοιεν (Indicativo)", correct: false }
+        ],
+        tradOptions: [
+            { text: "Sócrates dizia que os outros homens vivem para comer, mas ele comia para viver.", correct: true },
+            { text: "Sócrates perguntou se os homens comiam para viver ou viviam para comer.", correct: false }
+        ]
+    },
+    {
+        id: 12,
+        greek: "Ἀριστοτέλης ἐρωτηθεὶς τί περιγίγνεται τοῖς ψευδομένοις, ἔφη· 'ὅταν λέγωσιν ἀλήθειαν, μὴ πιστεύεσθαι'.",
+        tree: "img/apotegma_12.png",
+        hint: "<b>Conjunção Temporal:</b> <i>ὅταν</i> + Subjuntivo indica uma eventualidade no presente/futuro (Slide 19).",
+        morfOptions: [
+            { text: "ὅταν λέγωσιν (Oração temporal eventual); μὴ πιστεύεσθαι (Infinitivo sujeito da resposta)", correct: true },
+            { text: "ὅταν λέγωσιν (Oração causal); μὴ (Negação de fato real)", correct: false }
+        ],
+        tradOptions: [
+            { text: "Aristóteles, interrogado sobre o que ganham os mentirosos, disse: 'Não serem acreditados quando dizem a verdade'.", correct: true },
+            { text: "Aristóteles disse que mentirosos nunca dizem a verdade quando acreditamos neles.", correct: false }
+        ]
+    },
+    {
+        id: 13,
+        greek: "Ἀνάχαρσις ὁ Σκύθης ἐρωτηθεὶς τί ἐστιν ἐν ἀνθρώποις ἀγαθόν τε καὶ φαῦλον, ἔφη· 'γλῶσσα'.",
+        tree: "img/apotegma_13.png",
+        hint: "<b>Coordenadas Enclíticas:</b> O uso de <i>τε καὶ</i> liga dois adjetivos de mesmo peso sintático (Slide 17).",
+        morfOptions: [
+            { text: "ἀγαθόν τε καὶ φαῦλον (Adjetivos neutros coordenados); τί ἐστιν (Interrogativa indireta)", correct: true },
+            { text: "ἀγαθόν (Advérbio); φαῦλον (Sujeito da oração principal)", correct: false }
+        ],
+        tradOptions: [
+            { text: "Anacarsis, o Cita, interrogado sobre o que é bom e mau entre os homens, disse: 'A língua'.", correct: true },
+            { text: "O Cita perguntou se os homens eram bons ou maus por causa da língua.", correct: false }
+        ]
+    },
+    {
+        id: 14,
+        greek: "Ὁ αὐτὸς ἔφη κρεῖττον εἶναι ἕνα φίλον ἔχειν πολλοῦ ἄξιον ἢ πολλοὺς μηδενὸς ἀξίους.",
+        tree: "img/apotegma_14.png",
+        hint: "<b>Genitivo de Valor/Preço:</b> Os termos <i>πολλοῦ</i> e <i>μηδενὸς</i> indicam o valor atribuído aos amigos (Slide 18).",
+        morfOptions: [
+            { text: "κρεῖττον εἶναι (Oração impessoal); πολλοῦ / μηδενὸς (Genitivos de valor); ἄξιον (Predicativo)", correct: true },
+            { text: "κρεῖττον (Particípio); πολλοῦ (Dativo de posse)", correct: false }
+        ],
+        tradOptions: [
+            { text: "O mesmo dizia que é melhor ter um só amigo que valha muito do que muitos que não valham nada.", correct: true },
+            { text: "Ele disse que os amigos valiosos preferem um ao outro mais que a multidão.", correct: false }
+        ]
+    },
+    {
+        id: 15,
+        greek: "Δημόκριτος ἔλεγε τὴν τῶν λόγων κρίσιν ὤτων εἶναι ἔργον.",
+        tree: "img/apotegma_15.png",
+        hint: "<b>Genitivo Possessivo/Atributivo:</b> <i>ὤτων</i> (dos ouvidos) qualifica o substantivo <i>ἔργον</i> (trabalho/função) (Slide 15).",
+        morfOptions: [
+            { text: "τὴν κρίσιν (Sujeito do infinitivo); ὤτων (Genitivo possessivo); εἶναι (Infinitivo em discurso indireto)", correct: true },
+            { text: "ὤτων (Acusativo objeto); κρίσιν (Verbo principal)", correct: false }
+        ],
+        tradOptions: [
+            { text: "Demócrito dizia que o julgamento das palavras é função dos ouvidos.", correct: true },
+            { text: "Demócrito disse que as palavras julgam o que os ouvidos fazem.", correct: false }
+        ]
+    },
+    {
+        id: 16,
+        greek: "Πλάτων τοὺς μεθύοντας συνεβούλευε κατοπτρίζεσθαι· ἀποστήσεσθαι γὰρ τῆς τοιαύτης ἀσχημοσύνης.",
+        tree: "img/apotegma_16.png",
+        hint: "<b>Infinitivo Futuro:</b> <i>ἀποστήσεσθαι</i> indica uma ação futura resultante do conselho dado (Slide 26).",
+        morfOptions: [
+            { text: "τοὺς μεθύοντας (Particípio substantivado); κατοπτρίζεσθαι (Infinitivo presente); ἀποστήσεσθαι (Infinitivo futuro)", correct: true },
+            { text: "μεθύοντας (Verbo principal); ἀποστήσεσθαι (Particípio Aoristo)", correct: false }
+        ],
+        tradOptions: [
+            { text: "Platão aconselhava os bêbados a se olharem no espelho, pois assim se afastariam de tal indecência.", correct: true },
+            { text: "Platão dizia que bêbados não têm espelhos para ver sua própria imagem.", correct: false }
+        ]
+    },
+    {
+        id: 17,
+        greek: "Ἀντισθένης τοὺς μέλλοντας ἀγαθοὺς γίγνεσθαι ἔφη δεῖν τοὺς μὲν σώματα γυμνάζειν, τὰς δὲ ψυχὰς παιδεύειν.",
+        tree: "img/apotegma_17.png",
+        hint: "<b>Verbo Impessoal δεῖ:</b> O infinitivo <i>δεῖν</i> rege o restante da oração. <i>τοὺς μέλλοντας</i> é o sujeito (Slide 26).",
+        morfOptions: [
+            { text: "δεῖν (Infinitivo impessoal); τοὺς μέλλοντας (Part. Futuro substantivado); σώματα/ψυχάς (Objetos diretos)", correct: true },
+            { text: "δεῖν (Particípio); γυμνάζειν (Sujeito de ἔφη)", correct: false }
+        ],
+        tradOptions: [
+            { text: "Antístenes dizia que aqueles que pretendem ser bons devem exercitar os corpos e educar as almas.", correct: true },
+            { text: "Antístenes aconselhava os bons a serem educados por corpos exercitados.", correct: false }
+        ]
+    },
+    {
+        id: 18,
+        greek: "Πυθαγόρας ἐρωτηθεὶς τίς ἐστιν ὁ φίλος, ἔφη· 'ὁ ἕτερος ἐγώ'.",
+        tree: "img/apotegma_18.png",
+        hint: "<b>O Artigo com Pronome:</b> <i>ὁ ἕτερος</i> funciona como um predicativo articulado, definindo a identidade (Slide 19).",
+        morfOptions: [
+            { text: "τίς ἐστιν (Interrogativa direta reportada); ὁ ἕτερος ἐγώ (Predicativo do sujeito)", correct: true },
+            { text: "ἐρωτηθεὶς (Infinitivo); ἕτερος (Adjetivo no Genitivo)", correct: false }
+        ],
+        tradOptions: [
+            { text: "Pitágoras, interrogado sobre quem é o amigo, disse: 'O outro eu'.", correct: true },
+            { text: "Pitágoras perguntou ao amigo: 'Quem sou eu?'", correct: false }
+        ]
+    },
+    {
+        id: 19,
+        greek: "Σόλων ἔλεγε τοὺς λόγους εἴδωλα τῶν ἔργων εἶναι.",
+        tree: "img/apotegma_19.png",
+        hint: "<b>Predicativo do Acusativo:</b> Em <i>εἴδωλα εἶναι</i>, o substantivo εἴδωλα concorda com o sujeito da oração de infinitivo (λόγους) (Slide 26).",
+        morfOptions: [
+            { text: "τοὺς λόγους (Sujeito no acusativo); εἴδωλα (Predicativo no acusativo); τῶν ἔργων (Genitivo)", correct: true },
+            { text: "λόγους (Objeto direto); εἴδωλα (Verbo no plural)", correct: false }
+        ],
+        tradOptions: [
+            { text: "Sólon dizia que as palavras são as imagens das ações.", correct: true },
+            { text: "Sólon falava que as ações são as palavras das imagens.", correct: false }
+        ]
+    },
+    {
+        id: 20,
+        greek: "Ὁ αὐτὸς συνεβούλευε μὴ εὐδαιμονίζειν μηδένα πρὸ τοῦ τέλους.",
+        tree: "img/apotegma_20.png",
+        hint: "<b>Infinitivo Substantivado:</b> <i>τοῦ τέλους</i> segue a preposição <i>πρὸ</i>, mas note a negação <i>μή</i> com o infinitivo de conselho (Slide 15).",
+        morfOptions: [
+            { text: "μὴ εὐδαιμονίζειν (Infinitivo de objeto negado); μηδένα (Pronome indefinido); πρὸ τοῦ τέλους (Adjunto temporal)", correct: true },
+            { text: "εὐδαιμονίζειν (Imperativo); μηδένα (Sujeito da oração principal)", correct: false }
+        ],
+        tradOptions: [
+            { text: "O mesmo aconselhava a não considerar ninguém feliz antes do fim.", correct: true },
+            { text: "Ele disse que a felicidade não acaba antes de ninguém.", correct: false }
+        ]
     }
+    
 ];
 
 function renderQuestions() {
