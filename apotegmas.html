@@ -57,9 +57,9 @@ const questions = [
         id: 2,
         greek: "Διογένης θεασάμενος νεανίσκον καλλωπιζόμενον ἔφη · 'εἰ μὲν πρὸς ἄνδρας ἀτυχεῖς, εἰ δὲ πρὸς γυναῖκας ἀδικεῖς.'",
         tree: "img/apotegma_2.png",
-        hint: "<b>Particípio como completiva (OBJ) ou atributiva (ATR):</b> Os particípios que completam verbos de percepção (ver, ouvir) e se restringem ao substantivo com valor atributivo são marcados como ATR",
+        hint: "<b>Particípio como completiva (OBJ) ou atributiva (ATR):</b> Os particípios que completam verbos de percepção (ver, ouvir) e se restringem ao substantivo com valor atributivo são marcados como ATR. Observe a elipse verbal nas orações condicionais",
         morfOptions: [
-            { text: "θεασάμενος (Part. Aoristo Médio); καλλωπιζόμενον (Part. Presente Médio predicativo do objeto)", correct: true },
+            { text: "θεασάμενος (Part. Aoristo Médio); καλλωπιζόμενον (Part. Presente Médio referindo-se ao objeto)", correct: true },
             { text: "θεασάμενος (Part. Presente); καλλωπιζόμενον (Infinitivo Futuro)", correct: false }
         ],
         tradOptions: [
@@ -77,15 +77,15 @@ const questions = [
             { text: "ἐρωτηθεὶς (Part. Aoristo Ativo); κάλλιστον (Adjetivo Comparativo)", correct: false }
         ],
         tradOptions: [
-            { text: "Diógenes, interrogado sobre o que é o mais belo entre os homens, disse: 'Uma língua parcimoniosa'.", correct: true },
-            { text: "Diógenes perguntou o que era belo nos homens e eles disseram: 'Falar pouco'.", correct: false }
+            { text: "Diógenes perguntou o que era belo nos homens e eles disseram: 'Falar pouco'.", correct: false },
+            { text: "Diógenes, interrogado sobre o que é o mais belo entre os homens, disse: 'Uma língua parcimoniosa'.", correct: true }
         ]
     },
     {
         id: 4,
         greek: "Ὁ αὐτὸς ἔφη μᾶλλον ἐθέλειν ἐν πεπαιδευμένοις ἀποτυγχάνειν ἢ ἐν ἀπαιδεύτοις ἐπιτυγχάνειν.",
         tree: "img/apotegma_4.png",
-        hint: "<b>Infinitivos:</b> Aqui temos uma série de infinitivos em função de objeto do verbo principal (ἔφη).",
+        hint: "<b>Infinitivos:</b> Aqui temos uma série de infinitivos completivos (ἔφη, ἐθέλειν). Atenção à marca do comparativo",
         morfOptions: [
             { text: "ἐθέλειν, ἀποτυγχάνειν, ἐπιτυγχάνειν (Infinitivos Presentes); πεπαιδευμένοις (Part. Perfeito Passivo substantivo)", correct: true },
             { text: "ἐθέλειν (Verbo principal); πεπαιδευμένοις (Adjetivo no Acusativo plural)", correct: false }
@@ -119,7 +119,7 @@ const questions = [
             { text: "λοιδορούμενος (Part. Aoristo Médio); ὑπό + genitivo (Complemento de lugar)", correct: false }
         ],
         tradOptions: [
-            { text: "O mesmo, sendo insultado por um desavergonhado, disse: 'Ô <i>cara</i>, tu não tens meninas nos olhos, mas meretrizes'.", correct: true },
+            { text: "O mesmo, sendo insultado por um desavergonhado, disse: 'Ó meu, não tens meninas nos olhos, mas meretrizes'.", correct: true },
             { text: "Ele insultou um desavergonhado dizendo: 'Olha aqui, não vejo nada nos teus olhos além de sujeira'.", correct: false }
         ]
     },
@@ -129,8 +129,8 @@ const questions = [
         tree: "img/apotegma_7.png",
         hint: "<b>Acusativo com Infinitivo:</b> Construção clássica de discurso indireto. τοὺς ἀπαιδεύτους é o sujeito do infinitivo.",
         morfOptions: [
-            { text: "Acusativo com Infinitivo: τοὺς ἀπαιδεύτους (Sujeito) e διαφέρειν (Verbo); τῶν θηρίων (Ablativo de separação)", correct: true },
-            { text: "τοὺς ἀπαιδεύτους (Objeto Direto); διαφέρειν (Infinitivo de finalidade)", correct: false }
+            { text: "τοὺς ἀπαιδεύτους (Objeto Direto); διαφέρειν (Infinitivo de finalidade)", correct: false },
+            { text: "Acusativo com Infinitivo: τοὺς ἀπαιδεύτους (Sujeito) e διαφέρειν (Verbo); τῶν θηρίων (Genitivo de separação)", correct: true }
         ],
         tradOptions: [
             { text: "O mesmo disse que os ignorantes diferem das feras apenas pela forma.", correct: true },
@@ -175,20 +175,20 @@ const questions = [
             { text: "ἐρωτηθεὶς (Part. Pres. Ativo); ὅτι (Oração integrante)", correct: false }
         ],
         tradOptions: [
-            { text: "Teócrito, interrogado sobre 'por que odeias os maus e os bons', disse: 'os maus por causa da maldade, e os bons porque não odeiam os maus'.", correct: true },
-            { text: "Teócrito perguntou por que odiavam os bons.", correct: false }
+            { text: "Teócrito perguntou por que odiavam os bons.", correct: false },
+            { text: "Teócrito, interrogado sobre 'por que odeias os maus e os bons', disse: 'os maus por causa da maldade, e os bons porque não odeiam os maus'.", correct: true }
         ]
     }, {
         id: 11,
         greek: "Σωκράτης ἔφη τοὺς μὲν ἄλλους ἀνθρώπους ζῆν ἵνα ἐσθίοιεν, αὐτὸν δὲ ἐσθίειν ἵνα ζῴη.",
         tree: "img/apotegma_11.png",
-        hint: "<b>Optativo Oblíquo:</b> Após um tempo histórico (ἔφη), a conjunção final ἵνα pode vir com o modo Optativo.",
+        hint: "<b>Optativo Oblíquo:</b> Após um tempo histórico de verbo declarativo (ἔφη), a conjunção final ἵνα pode vir com o modo Optativo no lugar do Subjuntivo.",
         morfOptions: [
-            { text: "ζῆν, ἐσθίειν (Infinitivos); ἐσθίοιεν, ζῴη (Optativos de finalidade)", correct: true },
+            { text: "ζῆν, ἐσθίειν (Infinitivos); ἐσθίοιεν, ζῴη (Optativos)", correct: true },
             { text: "ζῆν, ἐσθίειν (Particípios); ἐσθίοιεν (Indicativo)", correct: false }
         ],
         tradOptions: [
-            { text: "Sócrates dizia que os outros homens vivem para comer, mas ele comia para viver.", correct: true },
+            { text: "Sócrates dizia que os outros homens viviam para comer, mas ele comia para viver.", correct: true },
             { text: "Sócrates perguntou se os homens comiam para viver ou viviam para comer.", correct: false }
         ]
     },
