@@ -22,6 +22,39 @@
             <button class="treebank-trigger" onclick="toggleTree('treeA2')">Ver Árvore Sintática ▾</button>
         </div>
         <div id="treeA2" class="treebank-content">
+            <p style="color: #666; font-style: italic;">[Fórmula padrão para mudança de governantes]</p>
+        </div>
+    </div>
+
+    <button class="btn-check" onclick="checkAnswers('apolodoro')">Verificar Apolodoro</button>
+    <div id="feedback-apolodoro" class="feedback"></div>
+</div>
+
+
+<div class="container">
+    <h1>Pseudo-Apolodoro: Biblioteca (Fórmulas Mitográficas)</h1>
+    <p>A escrita de Apolodoro é baseada em fórmulas de sucessão e descendência. Complete os padrões mais comuns da mitografia grega.</p>
+
+    <div class="question-box">
+        <div class="section-title">Genealogia dos Deuses (Bibl. 1.3.1)</div>
+        <span class="greek-text">ἐκ μὲν οὖν <input type="text" class="cloze" data-ans="Θέμιδος"> τῆς Οὐρανοῦ <input type="text" class="cloze" data-ans="γεννᾷ"> θυγατέρας ὥρας.</span>
+        <div class="section-title">
+            <span>Trigrama Frequente: "ἐκ ... γεννᾷ" (de fulana, gera...)</span>
+            <button class="treebank-trigger" onclick="toggleTree('treeA1')">Ver Árvore Sintática ▾</button>
+        </div>
+        <div id="treeA1" class="treebank-content">
+            <p style="color: #666; font-style: italic;">[Padrão: Preposição de origem + Genitivo + Verbo de procriação]</p>
+        </div>
+    </div>
+
+    <div class="question-box">
+        <div class="section-title">Sucessão de Poder (Bibl. 3.14.5)</div>
+        <span class="greek-text">Μετὰ δὲ <input type="text" class="cloze" data-ans="Κέκροπα"> Κρανάος <input type="text" class="cloze" data-ans="παραλαμβάνει"> τὴν <input type="text" class="cloze" data-ans="βασιλείαν">.</span>
+        <div class="section-title">
+            <span>Tetragrama: "μετὰ ... παραλαμβάνει τὴν βασιλείαν"</span>
+            <button class="treebank-trigger" onclick="toggleTree('treeA2')">Ver Árvore Sintática ▾</button>
+        </div>
+        <div id="treeA2" class="treebank-content">
             <p style="color: #666; font-style: italic;">[Fórmula padrão para mudança de reis na Ática]</p>
         </div>
     </div>
