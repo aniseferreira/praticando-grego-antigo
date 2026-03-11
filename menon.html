@@ -1,99 +1,110 @@
-<section id="exercicio-menon">
-    <h3>Exercício: O "Enxame" de Virtudes (Mênon 71e-72a)</h3>
-    <p>Complete as lacunas do texto grego baseando-se nas dicas entre parênteses. Use acentuação correta.</p>
+<div class="container">
+    <h1>Platão: O Enxame de Virtudes (Mênon 71e-72a)</h1>
+    
+    <p>Mênon tenta definir a virtude listando casos isolados. Complete as lacunas com os termos corretos e observe a repetição dos padrões gramaticais (n-grams).</p>
 
-    <div class="pergunta">
-        <p>
-            1. πρῶτον μὲν, εἰ βούλει 
-            <input type="text" id="p1" data-answer="ἀνδρὸς"> (do homem) 
-            ἀρετήν, 
-            <input type="text" id="p2" data-answer="ῥᾴδιον"> (fácil) εἰπεῖν·
-        </p>
-        <p>
-            2. <input type="text" id="p3" data-answer="αὕτη"> (esta) 
-            ἐστὶν ἀνδρὸς <input type="text" id="p4" data-answer="ἀρετή"> (virtude)...
-        </p>
-        <p>
-            3. εἰ δὲ βούλει <input type="text" id="p5" data-answer="γυναικὸς"> (da mulher) 
-            ἀρετήν, οὐ <input type="text" id="p6" data-answer="χαλεπὸν"> (difícil) διελθεῖν...
-        </p>
+    <div class="question-box" id="q1">
+        <span class="greek-text">πρῶτον μὲν, εἰ βούλει <input type="text" class="cloze" data-ans="ἀνδρὸς"> ἀρετήν, ῥᾴδιον εἰπεῖν.</span>
+        <div class="section-title">
+            <span>Análise Sintática</span>
+            <button class="treebank-trigger" onclick="toggleTree('tree1')">Ver Árvore Sintática ▾</button>
+        </div>
+        <div id="tree1" class="treebank-content">
+            <p style="color: #666; font-style: italic;">[Insira aqui a árvore de: εἰ βούλει ἀνδρὸς ἀρετήν]</p>
+        </div>
     </div>
 
-    <button onclick="verificarRespostas()">Verificar Respostas</button>
-    <div id="resultado" style="margin-top: 20px; font-weight: bold;"></div>
-</section>
+    <div class="question-box" id="q2">
+        <span class="greek-text">εἰ δὲ βούλει <input type="text" class="cloze" data-ans="γυναικὸς"> ἀρετήν, οὐ <input type="text" class="cloze" data-ans="χαλεπὸν"> διελθεῖν.</span>
+        <div class="section-title">
+            <span>Análise Sintática</span>
+            <button class="treebank-trigger" onclick="toggleTree('tree2')">Ver Árvore Sintática ▾</button>
+        </div>
+        <div id="tree2" class="treebank-content">
+            <p style="color: #666; font-style: italic;">[Insira aqui a árvore de: γυναικὸς ἀρετήν...]</p>
+        </div>
+    </div>
+
+    <div class="question-box" id="q3">
+        <span class="greek-text">ἔστι δὲ καὶ ἄλλη ἀρετὴ <input type="text" class="cloze" data-ans="παιδός">, καὶ θηλείας καὶ ἄρρενος.</span>
+        <div class="section-title">
+            <span>Análise Sintática</span>
+            <button class="treebank-trigger" onclick="toggleTree('tree3')">Ver Árvore Sintática ▾</button>
+        </div>
+        <div id="tree3" class="treebank-content">
+            <p style="color: #666; font-style: italic;">[Insira aqui a árvore de: ἄλλη ἀρετὴ παιδός]</p>
+        </div>
+    </div>
+
+    <div class="question-box" id="q4">
+        <span class="greek-text">καὶ πρεσβυτέρου ἀνδρός, εἰ μὲν βούλει, ἐλευθέρου, εἰ δὲ βούλει, <input type="text" class="cloze" data-ans="δούλου">.</span>
+        <div class="section-title">
+            <span>Análise Sintática</span>
+            <button class="treebank-trigger" onclick="toggleTree('tree4')">Ver Árvore Sintática ▾</button>
+        </div>
+        <div id="tree4" class="treebank-content">
+            <p style="color: #666; font-style: italic;">[Insira aqui a árvore de: εἰ βούλει δούλου]</p>
+        </div>
+    </div>
+
+    <button onclick="checkAnswers()" style="width:100%; padding:15px; background:var(--primary); color:white; border:none; border-radius:8px; cursor:pointer; font-size:1.1em;">Verificar Respostas</button>
+    <div id="final-feedback" class="feedback" style="text-align:center; margin-top:20px;"></div>
+</div>
 
 <script>
-function verificarRespostas() {
-    const inputs = document.querySelectorAll('#exercicio-menon input');
-    let acertos = 0;
-    
-    inputs.forEach(input => {
-        const respostaCorreta = input.getAttribute('data-answer').trim();
-        const respostaUsuario = input.value.trim();
-        
-        if (respostaUsuario === respostaCorreta) {
-            input.style.backgroundColor = "#d4edda"; // Verde claro
-            input.style.borderColor = "#28a745";
-            acertos++;
-        } else {
-            input.style.backgroundColor = "#f8d7da"; // Vermelho claro
-            input.style.borderColor = "#dc3545";
-        }
-    });
+    // Função para mostrar/esconder as árvores sintáticas
+    function toggleTree(id) {
+        const content = document.getElementById(id);
+        content.classList.toggle('active');
+    }
 
-    const resultadoDiv = document.getElementById('resultado');
-    if (acertos === inputs.length) {
-        resultadoDiv.innerHTML = "🏆 Perfeito! Você dominou o enxame de virtudes.";
-        resultadoDiv.style.color = "#28a745";
-    } else {
-        resultadoDiv.innerHTML = "Existem erros. Tente novamente, prestando atenção aos acentos!";
-        resultadoDiv.style.color = "#dc3545";
+    // Função de verificação
+    function checkAnswers() {
+        const inputs = document.querySelectorAll('.cloze');
+        let correctCount = 0;
+
+        inputs.forEach(input => {
+            const userAns = input.value.trim().toLowerCase();
+            const correctAns = input.getAttribute('data-ans').toLowerCase();
+
+            if (userAns === correctAns) {
+                input.style.border = "2px solid #28a745";
+                input.style.backgroundColor = "#d4edda";
+                correctCount++;
+            } else {
+                input.style.border = "2px solid #dc3545";
+                input.style.backgroundColor = "#f8d7da";
+            }
+        });
+
+        const feedback = document.getElementById('final-feedback');
+        if (correctCount === inputs.length) {
+            feedback.innerHTML = "🏆 Excelente! Você identificou todos os padrões de Mênon.";
+            feedback.style.color = "#28a745";
+        } else {
+            feedback.innerHTML = "Algumas respostas estão incorretas. Verifique a grafia e os acentos.";
+            feedback.style.color = "#dc3545";
+        }
     }
-}
 </script>
- <style>
-        :root { --primary: #1a3a5a; --accent: #f1c40f; --bg: #f8f9fa; }
-        body { font-family: 'Didact Gothic', sans-serif; background: var(--bg); color: #333; line-height: 1.6; padding: 20px; }
-        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { font-family: 'Alegreya', serif; color: var(--primary); text-align: center; border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
-        .question-box { margin-bottom: 40px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; }
-        .greek-text { font-family: 'Alegreya', serif; font-size: 1.4em; color: #2c3e50; margin-bottom: 15px; display: block; }
-        .section-title { font-weight: bold; color: var(--primary); margin: 15px 0 10px; display: flex; align-items: center; justify-content: space-between; }
-        select { padding: 8px; border: 1px solid #ccc; border-radius: 4px; width: 100%; margin-bottom: 10px; font-family: inherit; }
-        .treebank-content { display: none; margin-top: 15px; text-align: center; border: 1px solid #eee; padding: 10px; }
-        .treebank-content.active { display: block; }
-        .treebank-trigger { background: #eef2f7; border: 1px solid #d1d9e6; padding: 8px; border-radius: 5px; cursor: pointer; width: 100%; display: flex; justify-content: space-between; }
-        .btn-hint { background: #fffdf0; border: 1px solid #f1c40f; color: #856404; padding: 4px 10px; border-radius: 15px; cursor: pointer; font-size: 0.8em; }
-        .feedback { font-weight: bold; margin-top: 10px; }
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
-        .modal-content { background: white; margin: 10% auto; padding: 25px; border-radius: 12px; width: 80%; max-width: 600px; position: relative; }
-        .close-modal { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; }
-    </style>
+
 <style>
-    #exercicio-menon {
-        background-color: #f9f9f9;
-        padding: 20px;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-        font-family: 'serif';
-    }
-    #exercicio-menon input {
-        padding: 5px;
-        font-size: 1.1em;
-        width: 120px;
+    /* Estilos Adicionais para os Inputs de Grego */
+    .cloze {
+        font-family: 'Alegreya', serif;
+        font-size: 1em;
+        padding: 2px 5px;
         border: 1px solid #ccc;
         border-radius: 4px;
+        width: 130px;
+        text-align: center;
+        background: #fffdf0;
     }
-    #exercicio-menon button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    #exercicio-menon button:hover {
-        background-color: #0056b3;
+    .treebank-content {
+        background: #fff;
+        border: 1px dashed #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        transition: all 0.3s ease;
     }
 </style>
