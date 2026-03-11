@@ -156,17 +156,37 @@
         </div>
     </div>
 
+    <div class="container">
+    <h1>Pseudo-Apolodoro: A Sucessão de Cranao (3.14.5 / 186)</h1>
+    <p>Pratique as fórmulas de transição e a construção do Genitivo Absoluto no texto de Apolodoro.</p>
+
     <div class="question-box">
-        <div class="section-title">Sucessão de Poder (Bibl. 3.14.5)</div>
-        <span class="greek-text">Μετὰ δὲ <input type="text" class="cloze" data-ans="Κέκροπα"> Κρανάος <input type="text" class="cloze" data-ans="παραλαμβάνει"> τὴν <input type="text" class="cloze" data-ans="βασιλείαν">.</span>
+        <div class="section-title">O Fim do Reinado de Cécrope</div>
+        <span class="greek-text">Κέκροπος δὲ <input type="text" class="cloze" data-ans="ἀποθανόντος"> Κραναὸς <input type="text" class="cloze" data-ans="ἐβασίλευσεν">.</span>
         <div class="section-title">
-            <span>Tetragrama: "μετὰ ... παραλαμβάνει τὴν βασιλείαν"</span>
-            <button class="treebank-trigger" onclick="toggleTree('treeA2')">Ver Árvore Sintática ▾</button>
+            <span>Trigrama: [Nome] + δὲ + [Particípio Aoristo]</span>
+            <button class="treebank-trigger" onclick="toggleTree('tree186a')">Ver Árvore Sintática ▾</button>
         </div>
-        <div id="treeA2" class="treebank-content">
-            <p style="color: #666; font-style: italic;">[Fórmula padrão para mudança de reis na Ática]</p>
+        <div id="tree186a" class="treebank-content">
+            <p style="color: #666; font-style: italic;">[Análise: Genitivo Absoluto indicando tempo/causa]</p>
         </div>
     </div>
+
+    <div class="question-box">
+        <div class="section-title">O Dilúvio de Deucalião</div>
+        <span class="greek-text">αὐτόχθων ὤν, ἐφ’ οὗ τὸν ἐπὶ <input type="text" class="cloze" data-ans="Δευκαλίωνος"> λέγεται <input type="text" class="cloze" data-ans="κατακλυσμὸν"> γενέσθαι.</span>
+        <div class="section-title">
+            <span>Quadrigrama: λέγεται + [Substantivo] + γενέσθαι</span>
+            <button class="treebank-trigger" onclick="toggleTree('tree186b')">Ver Árvore Sintática ▾</button>
+        </div>
+        <div id="tree186b" class="treebank-content">
+            <p style="color: #666; font-style: italic;">[Análise: Infinitivo em discurso indireto após 'λέγεται']</p>
+        </div>
+    </div>
+
+    <button class="btn-check" onclick="checkAnswers('apolodoro_v2')">Verificar Apolodoro</button>
+    <div id="feedback-apolodoro_v2" class="feedback"></div>
+</div>
 
     <div class="question-box">
         <div class="section-title">Assentamento (Bibl. 2.1.4)</div>
