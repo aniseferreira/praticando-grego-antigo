@@ -1,0 +1,82 @@
+<section id="exercicio-menon">
+    <h3>Exercício: O "Enxame" de Virtudes (Mênon 71e-72a)</h3>
+    <p>Complete as lacunas do texto grego baseando-se nas dicas entre parênteses. Use acentuação correta.</p>
+
+    <div class="pergunta">
+        <p>
+            1. πρῶτον μὲν, εἰ βούλει 
+            <input type="text" id="p1" data-answer="ἀνδρὸς"> (do homem) 
+            ἀρετήν, 
+            <input type="text" id="p2" data-answer="ῥᾴδιον"> (fácil) εἰπεῖν·
+        </p>
+        <p>
+            2. <input type="text" id="p3" data-answer="αὕτη"> (esta) 
+            ἐστὶν ἀνδρὸς <input type="text" id="p4" data-answer="ἀρετή"> (virtude)...
+        </p>
+        <p>
+            3. εἰ δὲ βούλει <input type="text" id="p5" data-answer="γυναικὸς"> (da mulher) 
+            ἀρετήν, οὐ <input type="text" id="p6" data-answer="χαλεπὸν"> (difícil) διελθεῖν...
+        </p>
+    </div>
+
+    <button onclick="verificarRespostas()">Verificar Respostas</button>
+    <div id="resultado" style="margin-top: 20px; font-weight: bold;"></div>
+</section>
+
+<script>
+function verificarRespostas() {
+    const inputs = document.querySelectorAll('#exercicio-menon input');
+    let acertos = 0;
+    
+    inputs.forEach(input => {
+        const respostaCorreta = input.getAttribute('data-answer').trim();
+        const respostaUsuario = input.value.trim();
+        
+        if (respostaUsuario === respostaCorreta) {
+            input.style.backgroundColor = "#d4edda"; // Verde claro
+            input.style.borderColor = "#28a745";
+            acertos++;
+        } else {
+            input.style.backgroundColor = "#f8d7da"; // Vermelho claro
+            input.style.borderColor = "#dc3545";
+        }
+    });
+
+    const resultadoDiv = document.getElementById('resultado');
+    if (acertos === inputs.length) {
+        resultadoDiv.innerHTML = "🏆 Perfeito! Você dominou o enxame de virtudes.";
+        resultadoDiv.style.color = "#28a745";
+    } else {
+        resultadoDiv.innerHTML = "Existem erros. Tente novamente, prestando atenção aos acentos!";
+        resultadoDiv.style.color = "#dc3545";
+    }
+}
+</script>
+
+<style>
+    #exercicio-menon {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-family: 'serif';
+    }
+    #exercicio-menon input {
+        padding: 5px;
+        font-size: 1.1em;
+        width: 120px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    #exercicio-menon button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #exercicio-menon button:hover {
+        background-color: #0056b3;
+    }
+</style>
