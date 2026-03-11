@@ -50,6 +50,58 @@
     <button onclick="checkAnswers()" style="width:100%; padding:15px; background:var(--primary); color:white; border:none; border-radius:8px; cursor:pointer; font-size:1.1em;">Verificar Respostas</button>
     <div id="final-feedback" class="feedback" style="text-align:center; margin-top:20px;"></div>
 </div>
+<div class="container">
+    <h1>Platão: Parmênides (137c - 138b)</h1>
+    
+    <p>Nesta passagem lógica, Parmênides explora as consequências de "O Um" (τὸ ἕν). Complete as lacunas focando nas partículas negativas e nos atributos do Um.</p>
+
+    <div class="question-box" id="p1">
+        <span class="greek-text">εἰ ἓν ἔστιν, ἆρ’ οὐχ οἷόν τε αὐτὸ <input type="text" class="cloze" data-ans="πολλὰ"> εἶναι;</span>
+        <div class="section-title">
+            <span>Análise Sintática: εἰ ἓν ἔστιν...</span>
+            <button class="treebank-trigger" onclick="toggleTree('treeP1')">Ver Árvore Sintática ▾</button>
+        </div>
+        <div id="treeP1" class="treebank-content">
+            <p style="color: #666; font-style: italic;">[Árvore: Protásis condicional com verbo de existência]</p>
+        </div>
+    </div>
+
+    <div class="question-box" id="p2">
+        <span class="greek-text">οὔτε ἄρα <input type="text" class="cloze" data-ans="μέρος"> αὐτοῦ οὔτε <input type="text" class="cloze" data-ans="ὅλον"> δεῖ αὐτὸ εἶναι.</span>
+        <div class="section-title">
+            <span>Análise Sintática: οὔτε... οὔτε...</span>
+            <button class="treebank-trigger" onclick="toggleTree('treeP2')">Ver Árvore Sintática ▾</button>
+        </div>
+        <div id="treeP2" class="treebank-content">
+            <p style="color: #666; font-style: italic;">[Árvore: Estrutura correlativa negativa 'neither... nor']</p>
+        </div>
+    </div>
+
+    <div class="question-box" id="p3">
+        <span class="greek-text">οὐδὲ <input type="text" class="cloze" data-ans="ἀρχὴν"> οὐδὲ <input type="text" class="cloze" data-ans="τελευτὴν"> οὐδὲ μέσον ἔχει.</span>
+        <div class="section-title">
+            <span>Análise Sintática: Acusativos de Objeto</span>
+            <button class="treebank-trigger" onclick="toggleTree('treeP3')">Ver Árvore Sintática ▾</button>
+        </div>
+        <div id="treeP3" class="treebank-content">
+            <p style="color: #666; font-style: italic;">[Árvore: Verbo 'ἔχει' com múltiplos objetos coordenados]</p>
+        </div>
+    </div>
+
+    <div class="question-box" id="p4">
+        <span class="greek-text">πέρας δὲ μὴ ἔχον <input type="text" class="cloze" data-ans="ἄπειρον"> ἂν εἴη.</span>
+        <div class="section-title">
+            <span>Análise Sintática: Particípio e Optativo</span>
+            <button class="treebank-trigger" onclick="toggleTree('treeP4')">Ver Árvore Sintática ▾</button>
+        </div>
+        <div id="treeP4" class="treebank-content">
+            <p style="color: #666; font-style: italic;">[Árvore: Particípio circunstancial 'ἔχον' expressando condição]</p>
+        </div>
+    </div>
+
+    <button onclick="checkAnswers()" style="width:100%; padding:15px; background:var(--primary); color:white; border:none; border-radius:8px; cursor:pointer; font-size:1.1em;">Verificar Respostas</button>
+    <div id="final-feedback" class="feedback" style="text-align:center; margin-top:20px;"></div>
+</div>
 
 <script>
     // Função para mostrar/esconder as árvores sintáticas
